@@ -1,0 +1,54 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Logo
+    |--------------------------------------------------------------------------
+    | Pad naar het logo-bestand in de public map.
+    */
+    'site_name'    => 'Snel Op Zoek',
+    'site_desc'    => 'Vind snel het juiste bedrijf bij u in de buurt.',
+    'favicon'      => '/images/favicon.png',
+    'logo'         => '/images/placeholder-logo.svg',
+    'footer_logo'  => '/images/placeholder-logo.svg',
+    'header_image' => '/images/bedrijfzoeken.png',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Kleuren
+    |--------------------------------------------------------------------------
+    | primary       = hoofdkleur (bijv. groene links, titels)
+    | primary_hover = donkerdere tint van de hoofdkleur bij hover
+    | accent        = accentkleur (bijv. rode hover-effecten, CTA-knop)
+    | accent_hover  = donkerdere tint van de accentkleur bij hover
+    */
+    'colors' => [
+        'primary'       => '#b8930a',
+        'primary_hover' => '#956e06',
+        'accent'        => '#b8930a',
+        'accent_hover'  => '#956e06',
+        'header_bg'     => '#2d3142',
+        'header_text'   => '#ffffff',
+        'footer_bg'     => '#2d3142',
+        'cta_bg'        => '#2d3142',
+        'cta_btn_bg'    => '#b8930a',
+        'cta_btn_text'  => '#ffffff',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Fonts
+    |--------------------------------------------------------------------------
+    | family = CSS font-family waarde
+    | google = optionele Google Fonts URL (of null om uit te schakelen)
+    */
+    'fonts' => [
+        'family' => "'DM Sans', Arial, sans-serif",
+        'google' => 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap',
+    ],
+
+    'template' => 'modern',
+
+];

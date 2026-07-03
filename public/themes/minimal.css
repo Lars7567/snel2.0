@@ -1,0 +1,901 @@
+/* =============================================
+   MINIMALISTISCH THEMA
+   Wit, clean, editorial — kaarten als lijst
+   ============================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    font-size: 17px;
+    font-weight: 400;
+    overflow-x: hidden;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* =====================
+   HEADER
+   ===================== */
+
+header {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header > div {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo { flex-shrink: 0; }
+
+header img {
+    max-width: 300px;
+    max-height: 90px;
+    width: auto;
+    height: auto;
+}
+
+header nav {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #444;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+header nav a:hover { color: var(--color-primary); }
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: #333;
+    padding: 4px;
+}
+
+/* Admin nav */
+.nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-auth a {
+    color: #555;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.nav-auth a:hover { color: var(--color-primary); }
+
+.logout-btn {
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+    transition: background 0.2s;
+}
+
+.logout-btn:hover { background: var(--color-primary); }
+
+/* Dropdown */
+.dropdown { position: relative; }
+.dropdown-toggle { cursor: pointer; }
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    display: none;
+    min-width: 180px;
+    z-index: 1000;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.dropdown-menu a {
+    display: block;
+    padding: 10px 16px;
+    color: #444;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #f0f0f0;
+}
+.dropdown-menu a:last-child { border-bottom: none; }
+.dropdown-menu.open { display: block; }
+
+/* =====================
+   HERO / HEADER SECTION
+   ===================== */
+
+.header-section {
+    background-image: none !important;
+    background-color: #f7f7f5;
+    height: auto;
+    padding: 64px 32px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.header-section::before {
+    content: 'Vind het juiste bedrijf bij u in de buurt';
+    display: block;
+    font-size: 2rem;
+    font-weight: 300;
+    color: #1a1a1a;
+    letter-spacing: -0.02em;
+    text-align: center;
+    max-width: 560px;
+    line-height: 1.3;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 620px;
+    height: 52px;
+    background: #fff;
+    display: flex;
+    border: 1px solid #d0d0d0;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.search-bar input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 0 18px;
+    font-size: 14px;
+    font-weight: 400;
+    height: 100%;
+    background: transparent;
+    color: #1a1a1a;
+    font-family: var(--font-family);
+}
+
+#soort-bedrijf { width: 65%; }
+#plaats {
+    width: 35%;
+    border-left: 1px solid #e0e0e0;
+}
+
+.search-bar button {
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    padding: 0 28px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background 0.2s;
+    font-family: var(--font-family);
+}
+
+.search-bar button:hover { background: var(--color-primary); }
+
+/* =====================
+   MAIN
+   ===================== */
+
+main { min-height: 60vh; }
+
+.container {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 64px 32px 80px;
+}
+
+h2.section-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #999;
+    text-align: left;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+/* =====================
+   KAARTEN — horizontale lijst
+   ===================== */
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.card {
+    flex: 1 1 100%;
+    background: #fff;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid #e8e8e8;
+    box-shadow: none;
+    display: grid;
+    grid-template-columns: 220px 1fr auto;
+    grid-template-rows: auto auto 1fr;
+    transition: background 0.15s;
+    overflow: hidden;
+    min-height: 160px;
+}
+
+.card:first-child { border-top: 1px solid #e8e8e8; }
+.card:hover { background: #fafafa; }
+
+/* Afbeelding: links, vaste hoogte */
+.card .card-image-link,
+.card > a:first-child {
+    grid-column: 1;
+    grid-row: 1 / 4;
+    align-self: center;
+    display: block;
+    padding: 0;
+    width: 220px;
+    flex-shrink: 0;
+}
+
+.image-placeholder {
+    width: 220px;
+    height: 180px;
+    flex-shrink: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Titel: midden-kolom rij 1 */
+.card h3 {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 20px 20px 4px 20px;
+    line-height: 1.4;
+    color: #1a1a1a;
+    margin: 0;
+    align-self: end;
+}
+
+/* Beschrijving: midden-kolom rij 2 */
+.card p,
+.card-desc {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #888;
+    padding: 0 20px 4px 20px;
+    margin: 0;
+    flex-grow: unset;
+}
+
+/* Meta: midden-kolom rij 3 */
+.card-meta {
+    grid-column: 2;
+    grid-row: 3;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 4px 20px 20px 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #bbb;
+    align-self: start;
+}
+
+.card-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.card-meta i {
+    color: var(--color-primary);
+    width: 12px;
+    flex-shrink: 0;
+}
+
+/* Knop: rechterkolom, alle rijen */
+.card-link {
+    grid-column: 3;
+    grid-row: 1 / 4;
+    align-self: center;
+    display: inline-block;
+    margin: 0 28px;
+    padding: 9px 22px;
+    font-size: 11px;
+    color: #1a1a1a;
+    background: transparent;
+    border: 1px solid #1a1a1a;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0;
+    text-align: center;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background 0.2s, color 0.2s;
+}
+
+.card-link:hover {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+.card-title-link,
+.card-titel-link,
+.card-naam-link {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+}
+
+.card-titel-link:hover,
+.card-naam-link:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+/* =====================
+   CTA BALK
+   ===================== */
+
+.cta-bar {
+    width: 100%;
+    background: var(--color-cta-bg);
+    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 48px 32px;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+.cta-content {
+    max-width: 960px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.cta-content h3 {
+    color: var(--color-cta-text);
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+
+.cta-button {
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    padding: 13px 36px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background 0.2s;
+    font-family: var(--font-family);
+}
+
+.cta-button:hover { background: var(--color-primary); }
+
+/* =====================
+   FOOTER
+   ===================== */
+
+footer {
+    background: #ffffff;
+    border-top: 1px solid #e8e8e8;
+    color: #555;
+    padding: 40px 0;
+    font-family: var(--font-family);
+}
+
+footer > div {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+footer img {
+    max-width: 260px;
+    max-height: 80px;
+    opacity: 0.7;
+}
+
+footer .footer-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+footer .footer-left { width: auto; }
+footer .footer-right { width: auto; }
+
+footer .footer-columns {
+    display: flex;
+    gap: 48px;
+}
+
+footer .footer-columns h4 {
+    color: #1a1a1a;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin: 0 0 12px 0;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #888;
+    font-size: 13px;
+    font-weight: 400;
+    transition: color 0.2s;
+    display: inline-block;
+}
+
+footer a:hover {
+    color: #1a1a1a;
+    padding-left: 0;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.footer-socials a {
+    color: #bbb;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.footer-socials a:hover {
+    color: #1a1a1a;
+    border-color: #1a1a1a;
+}
+
+.fa-instagram, .fa-facebook, .fa-linkedin {
+    font-size: 1rem;
+    color: inherit;
+    padding: 0;
+}
+
+.footer-bottom {
+    border-top: 1px solid #e8e8e8;
+    margin-top: 32px;
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #bbb;
+    letter-spacing: 0.05em;
+}
+
+/* =====================
+   ANDERE PAGINA HEADERS
+   ===================== */
+
+.about-header,
+.company-page-header,
+.header-bedrijven {
+    background-image: none !important;
+    background-color: #1a1a1a;
+    height: auto;
+    padding: 60px 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: none;
+}
+
+.about-header h1,
+.company-page-header .company-title h1 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin: 0;
+}
+
+.zoek-wrapper {
+    width: 60%;
+    max-width: 500px;
+}
+
+.zoek-wrapper input {
+    width: 100%;
+    padding: 13px 20px;
+    font-size: 14px;
+    border: 1px solid #d0d0d0;
+    border-radius: 0;
+    outline: none;
+    background: #fff;
+    font-family: var(--font-family);
+}
+
+/* =====================
+   DETAIL / COMPANY PAGES
+   ===================== */
+
+.company-section { max-width: 960px; margin: 48px auto; padding: 0 32px; }
+.company-section-inner { display: flex; gap: 40px; }
+.company-card-section { flex: 1 1 280px; max-width: 300px; align-self: flex-start; }
+.company-card-section .company-image { width: 100%; height: 180px; object-fit: cover; display: block; }
+.company-card-section .company-info { padding: 16px 0 0; }
+.company-card-section .company-info h3 { margin: 0 0 12px; font-size: 0.75rem; font-weight: 600; color: #bbb; letter-spacing: 0.15em; text-transform: uppercase; }
+.company-card-section .company-info p { margin: 0; padding: 5px 0; color: #444; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; }
+.company-info-icon { color: var(--color-primary); width: 14px; }
+.company-card-section .company-links { display: flex; gap: 10px; padding: 12px 0; margin-top: 8px; border-top: 1px solid #e8e8e8; }
+.company-card-section .company-links a { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border: 1px solid #e0e0e0; text-decoration: none; transition: all 0.2s; }
+.company-card-section .company-links a i { color: var(--color-primary) !important; font-size: 0.9rem; }
+.company-card-section .company-links a:hover { background: var(--color-primary); border-color: var(--color-primary); }
+.company-card-section .company-links a:hover i { color: #fff !important; }
+.company-details-section { flex: 2 1 500px; padding: 0 0 0 28px; align-self: flex-start; }
+.company-details-section h2 { margin-top: 0; color: var(--color-primary); font-weight: 500; }
+.company-details-section p { color: #555; line-height: 1.8; font-size: 0.95rem; }
+
+.company-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 20px;
+    padding: 9px 18px;
+    border: 1px solid #1a1a1a;
+    border-radius: 0;
+    background: transparent;
+    color: #1a1a1a;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+.company-back-btn:hover { background: #1a1a1a; color: #fff; }
+
+/* =====================
+   CONTACT PAGINA
+   ===================== */
+
+.contact_container { width: 100%; display: flex; justify-content: center; }
+.contact_inner { max-width: 960px; width: 100%; display: flex; gap: 20px; }
+.contactform_section { flex: 0 0 65%; padding: 80px 20px; }
+.form-group { margin-bottom: 18px; }
+.form-group input:not([type="radio"]), .form-group textarea { width: 100%; padding: 11px 14px; border: 1px solid #d0d0d0; font-size: 14px; outline: none; background: #fff; box-sizing: border-box; border-radius: 0; font-family: var(--font-family); transition: border-color 0.2s; }
+.form-group input:focus, .form-group textarea:focus { border-color: #1a1a1a; }
+.form-group textarea { min-height: 160px; resize: none; }
+.radios { display: flex; gap: 20px; margin: 10px 0 18px; }
+.radios label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 14px; }
+.submit-btn { width: 100%; padding: 14px; background: #1a1a1a; color: #fff; border: none; cursor: pointer; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.2s; font-family: var(--font-family); }
+.submit-btn:hover { background: var(--color-primary); }
+.contactinformation_section { flex: 0 0 35%; padding: 80px 20px; }
+.contactinformation_section_inner { padding: 0; }
+
+/* =====================
+   ABOUT PAGINA
+   ===================== */
+
+.hero_container { width: 100%; display: flex; justify-content: center; }
+.hero_inner { max-width: 960px; width: 100%; padding: 0 32px; display: flex; gap: 20px; }
+.hero_section { flex: 1 1 50%; display: flex; flex-direction: column; justify-content: center; padding: 60px 20px; min-width: 0; }
+.hero_image { max-width: 100%; display: block; }
+.hero_section_main { padding: 25px 0; width: 100%; }
+.hero_third_section { padding: 25px 0; }
+.accordion-container { max-width: 960px; width: 100%; padding: 25px 32px 80px; margin: 0 auto; }
+.accordion-item { border: 1px solid #e8e8e8; margin-bottom: 6px; overflow: hidden; }
+.accordion-header { width: 100%; text-align: left; padding: 14px 18px; background: #fff; border: none; outline: none; cursor: pointer; font-weight: 500; font-size: 0.9rem; position: relative; transition: background 0.2s; color: #1a1a1a; }
+.accordion-header:hover { background: #f7f7f5; }
+.accordion-header::after { content: '+'; position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: #bbb; }
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding: 0 18px; background: #fff; }
+.accordion-content p { margin: 14px 0; font-size: 14px; color: #666; }
+.accordion-item.active .accordion-header::after { content: '−'; }
+
+/* =====================
+   ADMIN DASHBOARD
+   ===================== */
+
+.locations, .categories { padding: 2.5rem 1.5rem; background: #fafafa; }
+.locations__inner, .categories__inner { max-width: 960px; margin: 0 auto; }
+.locations__title, .categories__title { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.5rem; color: #1a1a1a; padding-bottom: 10px; border-bottom: 1px solid #e8e8e8; }
+.locations__list, .categories__list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; list-style: none; padding: 0; margin: 0; }
+.locations__item, .categories__item { display: flex; justify-content: space-between; align-items: center; background: #fff; border: 1px solid #e8e8e8; padding: 12px 16px; transition: border-color 0.2s; color: #333; text-decoration: none; }
+.locations__item:hover, .categories__item:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.locations__count, .categories__count { background: var(--color-primary); color: #fff; padding: 2px 10px; font-size: 11px; font-weight: 700; }
+
+/* =====================
+   BEDRIJVEN PAGINA — grid override naar lijst
+   ===================== */
+
+.bedrijven-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+}
+
+.bedrijven-grid .card {
+    flex: 1 1 100% !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.bedrijven-grid .card:first-child {
+    border-top: 1px solid #e8e8e8 !important;
+}
+
+.bedrijven-grid .card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    background: #fafafa !important;
+}
+
+/* =====================
+   BEDRIJVEN PAGINA EXTRA
+   ===================== */
+
+.filter-bar-wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 28px; padding: 10px 0; border-top: 1px solid #e8e8e8; border-bottom: 1px solid #e8e8e8; }
+.filter-arrow { background: transparent; border: none; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #ccc; font-size: 0.7rem; }
+.filter-arrow:hover { color: var(--color-primary); }
+.filter-bar { display: flex; flex-wrap: nowrap; gap: 4px; flex: 1; overflow-x: auto; scrollbar-width: none; }
+.filter-bar::-webkit-scrollbar { display: none; }
+.cat-chip { background: transparent; border: none; border-bottom: 2px solid transparent; padding: 4px 12px; font-size: 13px; font-weight: 500; font-family: var(--font-family); cursor: pointer; color: #aaa; white-space: nowrap; transition: color 0.15s, border-color 0.15s; letter-spacing: 0.05em; }
+.cat-chip:hover { color: #333; border-bottom-color: #d0d0d0; }
+.cat-chip.active { color: var(--color-primary); border-bottom-color: var(--color-primary); font-weight: 600; }
+.geen-resultaten { text-align: center; padding: 60px 24px; font-size: 16px; color: #aaa; }
+
+/* =====================
+   ADMIN FORMULIEREN (bedrijf/categorie aanmaken & bewerken)
+   ===================== */
+
+.company {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px 80px;
+}
+
+.company__container {
+    width: 100%;
+    max-width: 800px;
+}
+
+.company__container > h1,
+.company__title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 28px;
+}
+
+.company__form {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    padding: 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+.company__group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.company__group:last-child { margin-bottom: 0; }
+
+.company__group--half {
+    flex-direction: row;
+    gap: 16px;
+}
+
+.company__group--half .company__input { flex: 1; }
+
+.company__input,
+.company__textarea,
+.company__select {
+    width: 100%;
+    padding: 11px 14px;
+    font-size: 14px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+    color: #1a1a1a;
+}
+
+.company__textarea { min-height: 120px; resize: vertical; }
+
+.company__input:focus,
+.company__textarea:focus,
+.company__select:focus {
+    border-color: #1a1a1a;
+}
+
+.company__button {
+    display: inline-block;
+    padding: 11px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    font-family: var(--font-family);
+    letter-spacing: 0.04em;
+}
+
+.company__button:hover { background: var(--color-primary); }
+
+.company__errors {
+    background: #fee2e2;
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.company__errors ul { margin: 0; padding-left: 20px; }
+
+/* =====================
+   ANIMATIES
+   ===================== */
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.main-inner { animation: fadeIn 0.4s ease both; }
+
+/* =====================
+   RESPONSIVE
+   ===================== */
+
+@media (max-width: 900px) {
+    header > div { padding: 0 20px; }
+    .hamburger { display: block; }
+    #nav-links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e8e8e8;
+        border-bottom: 1px solid #e8e8e8;
+        z-index: 999;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        padding: 0;
+    }
+    #nav-links.open { max-height: 280px; padding: 12px 0; }
+    #nav-links a { padding: 11px 24px; display: block; text-align: center; width: 100%; font-size: 14px; }
+    .card { grid-template-columns: 160px 1fr auto; }
+    .image-placeholder { width: 160px; height: 160px; }
+    footer .footer-top { flex-direction: column; gap: 24px; }
+    .cta-content { flex-direction: column; text-align: center; }
+    .contact_inner { flex-direction: column; }
+    .contactform_section, .contactinformation_section { flex: 1 1 100%; padding: 40px 20px; }
+    .company-section-inner { flex-direction: column; }
+    .hero_inner { flex-direction: column; }
+    .hero_section { flex: 1 1 100%; padding: 30px 0; }
+    .hero_section:has(.hero_image) { display: none; }
+    .hero_section { text-align: center; }
+}
+
+@media (max-width: 600px) {
+    .header-section { padding: 48px 20px 56px; }
+    .header-section::before { font-size: 1.4rem; }
+    .search-bar { flex-direction: column; height: auto; }
+    .search-bar input { height: 46px; }
+    #soort-bedrijf, #plaats { width: 100%; border-left: none; border-bottom: 1px solid #e0e0e0; }
+    .search-bar button { width: 100%; height: 46px; }
+    .container { padding: 48px 20px 60px; }
+    .card {
+        grid-template-columns: 90px 1fr;
+        grid-template-rows: auto auto auto;
+    }
+    .card .card-image-link,
+    .card > a:first-child,
+    .card > .image-placeholder:first-child { grid-column: 1; grid-row: 1 / 4; }
+    .image-placeholder { width: 90px; height: 120px; }
+    .card h3 { grid-column: 2; grid-row: 1; font-size: 13px; padding: 12px 12px 4px 12px; }
+    .card p, .card-desc { grid-column: 2; grid-row: 2; font-size: 12px; padding: 0 12px 4px 12px; }
+    .card-meta { grid-column: 2; grid-row: 3; padding: 0 12px 10px; flex-direction: column; gap: 4px; }
+    .card-link { grid-column: 1 / 3; grid-row: 4; margin: 0 12px 12px; align-self: start; width: calc(100% - 24px); font-size: 11px; padding: 9px; text-align: center; }
+    .zoek-wrapper { width: 90%; }
+    footer .footer-columns { flex-direction: column; gap: 20px; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; }
+}

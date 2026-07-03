@@ -1,0 +1,507 @@
+/* =============================================
+   RETRO THEMA
+   Vintage, krant-stijl, serif lettertypes
+   ============================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 16px;
+    background: #fdf6e3;
+    color: #2d1f0a;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* =====================
+   HEADER
+   ===================== */
+
+header {
+    background: #2d1f0a;
+    border-bottom: 4px solid #8b6914;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header > div {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.logo { flex-shrink: 0; }
+
+header img {
+    max-width: 300px;
+    max-height: 90px;
+    width: auto;
+    height: auto;
+    filter: brightness(0) invert(1) sepia(0.2);
+}
+
+nav.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+nav.nav-links a {
+    color: #d4b483;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-style: italic;
+    font-family: Georgia, serif;
+    padding: 7px 14px;
+    border-radius: 2px;
+    letter-spacing: 0.02em;
+    transition: color 0.15s, background 0.15s;
+}
+
+nav.nav-links a:hover {
+    color: #fdf6e3;
+    background: rgba(255,255,255,0.08);
+}
+
+.hamburger {
+    display: none;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #d4b483;
+    padding: 8px 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+/* =====================
+   HERO / SEARCH
+   ===================== */
+
+.header-section {
+    background: #2d1f0a;
+    background-image: radial-gradient(ellipse at center, #3d2b10 0%, #2d1f0a 70%);
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 28px;
+    border-bottom: 3px double #8b6914;
+}
+
+.search-bar {
+    display: flex;
+    width: 100%;
+    max-width: 660px;
+    border: 2px solid #8b6914;
+    overflow: hidden;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 14px 18px;
+    border: none;
+    font-size: 15px;
+    outline: none;
+    color: #2d1f0a;
+    background: #fdf8ee;
+    border-right: 1px solid #c8a85a;
+    font-family: Georgia, serif;
+    font-style: italic;
+}
+
+.search-bar input::placeholder { color: #9a8060; font-style: italic; }
+
+.search-bar button {
+    padding: 0 24px !important;
+    background: #8b6914 !important;
+    color: #fdf8ee !important;
+    border: none;
+    font-size: 14px !important;
+    font-style: italic;
+    font-family: Georgia, serif;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: background 0.2s;
+}
+
+.search-bar button:hover { background: #6d5210 !important; }
+
+/* =====================
+   CONTAINER
+   ===================== */
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 28px 80px;
+}
+
+h2.section-title {
+    text-align: center;
+    font-size: 1.9rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+    color: #2d1f0a;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+}
+
+h2.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #8b6914;
+    margin: 14px auto 40px;
+}
+
+/* =====================
+   KAARTEN — vintage stijl
+   ===================== */
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    justify-content: flex-start;
+}
+
+.card {
+    flex: 0 0 calc(33.333% - 19px);
+    background: #fffbf0;
+    border: 1px solid #c8a85a;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 4px 0 #c8a85a;
+    transition: box-shadow 0.2s, transform 0.2s;
+    position: relative;
+}
+
+.card:hover {
+    box-shadow: 6px 6px 0 #8b6914;
+    transform: translate(-2px, -2px);
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-bottom: 2px solid #c8a85a;
+    flex-shrink: 0;
+}
+
+.card-image-link {
+    display: block;
+    line-height: 0;
+}
+
+.card-image-link .image-placeholder {
+    height: 200px;
+    border-bottom: 2px solid #c8a85a;
+}
+
+.image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: sepia(0.3) contrast(1.05);
+    transition: filter 0.3s, transform 0.3s;
+}
+
+.card:hover .image-placeholder img {
+    filter: sepia(0.1) contrast(1);
+    transform: scale(1.03);
+}
+
+.card h3 {
+    margin: 0;
+    padding: 16px 18px 6px;
+    font-size: 17px;
+    font-weight: 700;
+    font-family: Georgia, serif;
+    color: #2d1f0a;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+}
+
+.card p {
+    font-size: 13.5px;
+    color: #6b4f2a;
+    font-style: italic;
+    font-family: Georgia, serif;
+    padding: 0 18px;
+    margin: 4px 0;
+    line-height: 1.65;
+    flex-grow: 1;
+}
+
+.card-desc { flex-grow: 1; }
+
+.card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 18px 12px;
+    font-size: 12px;
+    color: #8b6914;
+    border-top: 1px dashed #c8a85a;
+    font-family: Georgia, serif;
+}
+
+.card-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.card-meta i { color: #8b6914; width: 12px; }
+
+.card-link {
+    display: block;
+    margin: 12px 18px 16px;
+    padding: 10px 18px;
+    font-size: 13px;
+    color: #fdf8ee;
+    background: #2d1f0a;
+    text-decoration: none;
+    font-family: Georgia, serif;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    text-align: center;
+    border: 1px solid #2d1f0a;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.card-link:hover {
+    background: #8b6914;
+    border-color: #8b6914;
+}
+
+.card-title-link,
+.card-titel-link,
+.card-naam-link { text-decoration: none; color: inherit; font-weight: 700; }
+.card-titel-link:hover, .card-naam-link:hover { color: var(--color-primary); text-decoration: underline; }
+
+/* =====================
+   CTA BAR
+   ===================== */
+
+.cta-bar {
+    background: var(--color-cta-bg);
+    border-top: 3px double #8b6914;
+    border-bottom: 3px double #8b6914;
+    padding: 56px 28px;
+    text-align: center;
+}
+
+.cta-content { max-width: 700px; margin: 0 auto; }
+
+.cta-bar h3 {
+    color: var(--color-cta-text);
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+    font-style: italic;
+    margin: 0 0 24px;
+    letter-spacing: 0.02em;
+}
+
+.cta-button {
+    background: var(--color-cta-btn-bg);
+    color: var(--color-cta-btn-text);
+    border: 2px solid #c8a85a;
+    padding: 13px 36px;
+    font-size: 14px;
+    font-family: Georgia, serif;
+    font-style: italic;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cta-button:hover { background: #6d5210; }
+
+/* =====================
+   PAGE HEADERS
+   ===================== */
+
+.about-header, .company-page-header, .header-bedrijven {
+    background: #2d1f0a;
+    border-bottom: 3px double #8b6914;
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 28px;
+}
+
+.about-header h1, .company-page-header h1, .header-bedrijven h1 {
+    color: #fdf8ee;
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+    font-style: italic;
+    margin: 0;
+}
+
+/* =====================
+   DROPDOWN
+   ===================== */
+
+.dropdown { position: relative; display: inline-block; }
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background: #2d1f0a;
+    border: 1px solid #8b6914;
+    min-width: 200px;
+    z-index: 999;
+    padding: 4px;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+}
+
+.dropdown-menu a { display: block; padding: 10px 14px; color: #d4b483 !important; font-size: 13.5px; font-style: italic; font-family: Georgia, serif; text-decoration: none; }
+.dropdown-menu a:hover { background: rgba(255,255,255,0.06) !important; color: #fdf8ee !important; }
+.dropdown.open .dropdown-menu, .dropdown:hover .dropdown-menu { display: block; }
+
+/* =====================
+   FOOTER
+   ===================== */
+
+footer.site-footer {
+    background: #1a1106;
+    border-top: 3px double #8b6914;
+    color: #7a6040;
+    padding: 56px 0 0;
+}
+
+.footer-inner { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #3d2b10;
+}
+
+.footer-left { flex: 0 0 auto; }
+
+footer img {
+    max-width: 300px;
+    max-height: 90px;
+    opacity: 0.6;
+    filter: brightness(0) invert(1) sepia(0.3);
+}
+
+.footer-socials { display: flex; gap: 14px; margin-top: 16px; }
+.footer-socials a { color: #5a4020; font-size: 18px; transition: color 0.2s; }
+.footer-socials a:hover { color: #8b6914; }
+
+.footer-right { flex: 1; display: flex; justify-content: flex-end; }
+.footer-columns { display: flex; gap: 48px; }
+
+footer h4 { color: #d4b483; font-size: 11px; font-weight: 700; font-family: Georgia, serif; text-transform: uppercase; letter-spacing: 0.15em; margin: 0 0 14px; }
+footer ul { list-style: none; margin: 0; padding: 0; }
+footer ul li { margin-bottom: 10px; }
+footer ul li a { color: #7a6040; text-decoration: none; font-size: 14px; font-style: italic; font-family: Georgia, serif; transition: color 0.2s; }
+footer ul li a:hover { color: #d4b483; }
+
+.footer-bottom { text-align: center; padding: 18px; font-size: 12px; color: #4a3520; border-top: 1px solid #3d2b10; font-style: italic; font-family: Georgia, serif; }
+
+/* =====================
+   BEDRIJF DETAIL
+   ===================== */
+
+.company-section { max-width: 1100px; margin: 48px auto; padding: 0 28px; }
+.contact_inner { max-width: 960px; width: 100%; display: flex; gap: 24px; }
+.hero_inner { max-width: 960px; width: 100%; padding: 0 28px; display: flex; gap: 20px; }
+.hero_image { max-width: 100%; display: block; }
+.accordion-container { max-width: 960px; width: 100%; padding: 25px 28px 80px; margin: 0 auto; }
+
+.company-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 20px;
+    padding: 9px 18px;
+    border: 1.5px solid #8b6914;
+    border-radius: 0;
+    background: transparent;
+    color: #8b6914;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: Georgia, serif;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+.company-back-btn:hover { background: #8b6914; color: #fff; }
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding: 0 20px; background: #fffbf0; }
+
+/* =====================
+   LOCATIES / CATEGORIEËN (admin)
+   ===================== */
+
+.locations__inner, .categories__inner { max-width: 1100px; margin: 0 auto; padding: 40px 28px; }
+.locations__title, .categories__title { font-size: 1.5rem; font-weight: 700; font-family: Georgia, serif; color: #2d1f0a; margin-bottom: 20px; }
+.locations__list, .categories__list { display: flex; flex-direction: column; gap: 4px; list-style: none; padding: 0; margin: 0; }
+.locations__item, .categories__item { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; background: #fffbf0; border: 1px solid #c8a85a; text-decoration: none; color: #2d1f0a; font-size: 14px; font-style: italic; font-family: Georgia, serif; transition: background 0.15s; }
+.locations__item:hover, .categories__item:hover { background: #fdf6e3; }
+.locations__count, .categories__count { background: #2d1f0a; color: #d4b483; padding: 2px 10px; font-size: 12px; font-style: normal; }
+
+/* =====================
+   ADMIN FORMULIEREN
+   ===================== */
+
+.company { display: flex; justify-content: center; padding: 40px 20px 80px; }
+.company__container { width: 100%; max-width: 800px; }
+.company__container > h1, .company__title { font-size: 1.8rem; font-weight: 700; font-family: Georgia, serif; color: #2d1f0a; margin-bottom: 28px; }
+.company__form { display: flex; flex-direction: column; background: #fffbf0; border: 1px solid #c8a85a; padding: 32px; box-shadow: 3px 3px 0 #c8a85a; }
+.company__group { display: flex; flex-direction: column; margin-bottom: 20px; }
+.company__group--half { flex-direction: row; gap: 16px; }
+.company__group--half .company__input { flex: 1; }
+.company__input, .company__textarea, .company__select { width: 100%; padding: 10px 14px; font-size: 14px; border: 1px solid #c8a85a; background: #fdf8ee; color: #2d1f0a; outline: none; transition: border-color 0.2s; box-sizing: border-box; font-family: Georgia, serif; }
+.company__textarea { min-height: 120px; resize: vertical; }
+.company__input:focus, .company__textarea:focus, .company__select:focus { border-color: #2d1f0a; }
+.company__button { display: inline-block; padding: 10px 24px; font-size: 14px; font-style: italic; font-family: Georgia, serif; background: #2d1f0a; color: #fdf8ee; border: 1px solid #2d1f0a; cursor: pointer; transition: background 0.2s; letter-spacing: 0.05em; }
+.company__button:hover { background: #8b6914; border-color: #8b6914; }
+.company__errors { background: #fee2e2; border: 1px solid #fca5a5; color: #991b1b; padding: 14px 18px; margin-bottom: 20px; }
+.company__errors ul { margin: 0; padding-left: 20px; }
+
+/* =====================
+   RESPONSIVE
+   ===================== */
+
+@media (max-width: 900px) {
+    .card { flex: 1 1 calc(50% - 14px); }
+}
+
+@media (max-width: 600px) {
+    .cards { flex-direction: column; gap: 20px; }
+    .card { flex: 1 1 100%; }
+    .hamburger { display: block; }
+    #nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #2d1f0a; border-bottom: 2px solid #8b6914; }
+    #nav-links.open { display: flex; }
+    #nav-links a { padding: 14px 20px; border-bottom: 1px solid #3d2b10; }
+    .nav-public { position: relative; }
+    .footer-top { flex-direction: column; gap: 24px; }
+    .footer-right { justify-content: flex-start; }
+}
