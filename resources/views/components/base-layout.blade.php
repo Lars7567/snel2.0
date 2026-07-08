@@ -151,7 +151,7 @@
             position: relative;
         }
         .site-header__logo img {
-            height: 48px;
+            height: 64px;
             width: auto;
             display: block;
         }
