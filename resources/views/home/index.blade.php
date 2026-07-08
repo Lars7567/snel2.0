@@ -103,7 +103,7 @@
     width: 100%;
     aspect-ratio: 4/3;
     overflow: hidden;
-    background: #f5f0e8;
+    background: var(--color-header-bg, #f5f0e8);
     flex-shrink: 0;
 }
 .bdr-kaart__img img {

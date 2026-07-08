@@ -49,7 +49,7 @@
 }
 .ao-blok__ico {
     width: 52px; height: 52px;
-    background: #f5f0e8;
+    background: var(--color-header-bg, #f5f0e8);
     border-radius: 14px;
     display: flex; align-items: center; justify-content: center;
     font-size: 20px; color: #8b7355;
@@ -67,7 +67,7 @@
 
 /* ── Verhaal ──────────────────────────────────────── */
 .ao-verhaal {
-    background: #f5f0e8;
+    background: var(--color-header-bg, #f5f0e8);
     padding: 96px 32px;
 }
 .ao-verhaal__inner {

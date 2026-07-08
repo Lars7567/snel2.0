@@ -175,7 +175,7 @@
     transition: background 0.12s;
 }
 .bvn-dropdown__item:hover  { background: #f9f7f3; color: #1a1a1a; }
-.bvn-dropdown__item.active { background: #f5f0e8; color: #8b7355; font-weight: 700; }
+.bvn-dropdown__item.active { background: var(--color-header-bg, #f5f0e8); color: #8b7355; font-weight: 700; }
 
 .bvn-dropdown__toggle i:first-child { color: #8b7355; font-size: 12px; }
 
@@ -203,7 +203,7 @@
 
 .bvn-kaart__img {
     width: 100%; aspect-ratio: 4/3; overflow: hidden;
-    background: #f5f0e8; flex-shrink: 0;
+    background: var(--color-header-bg, #f5f0e8); flex-shrink: 0;
 }
 .bvn-kaart__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s; }
 .bvn-kaart:hover .bvn-kaart__img img { transform: scale(1.05); }

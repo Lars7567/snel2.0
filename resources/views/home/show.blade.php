@@ -3,11 +3,11 @@
 <style>
 .dp * { box-sizing: border-box; }
 .dp *:not(i) { font-family: 'Plus Jakarta Sans', sans-serif; }
-.dp { background: #faf8f4; min-height: 80vh; }
+.dp { background: var(--color-body-bg, #faf8f4); min-height: 80vh; }
 
 /* ── Hero ─────────────────────────────────────────────── */
 .dp-hero {
-    background: #f5f0e8;
+    background: var(--color-header-bg, #f5f0e8);
     border-bottom: 1px solid #e8e2d8;
     padding: 40px 32px 36px;
 }
@@ -126,7 +126,7 @@
 
 .dp-cats { display: flex; flex-wrap: wrap; gap: 8px; }
 .dp-cats__tag {
-    background: #f5f0e8;
+    background: var(--color-header-bg, #f5f0e8);
     color: #8b7355;
     font-size: 12px;
     font-weight: 700;
@@ -163,7 +163,7 @@
 }
 .dp-kaart__ico {
     width: 30px; height: 30px;
-    background: #f5f0e8;
+    background: var(--color-header-bg, #f5f0e8);
     border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
     color: #8b7355; font-size: 12px; flex-shrink: 0;
@@ -195,7 +195,7 @@
 .dp-socials { display: flex; gap: 8px; flex-wrap: wrap; }
 .dp-socials a {
     width: 36px; height: 36px; border-radius: 9px;
-    background: #f5f0e8; border: 1px solid #e2dbd0;
+    background: var(--color-header-bg, #f5f0e8); border: 1px solid #e2dbd0;
     display: grid; place-items: center;
     color: #b8a898; text-decoration: none;
     transition: background 0.15s, color 0.15s;

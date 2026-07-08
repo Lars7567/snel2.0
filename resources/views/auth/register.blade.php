@@ -5,7 +5,7 @@
 
 .reg-wrap {
     min-height: calc(100vh - 200px);
-    background: #f5f0e8;
+    background: var(--color-header-bg, #f5f0e8);
     display: flex; align-items: center; justify-content: center;
     padding: 48px 24px;
 }
