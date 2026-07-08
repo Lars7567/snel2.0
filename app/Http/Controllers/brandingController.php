@@ -66,6 +66,9 @@ class brandingController extends Controller
         $settings['colors']['cta_text']      = $request->input('cta_text',     $settings['colors']['cta_text']     ?? '#ffffff');
         $settings['colors']['cta_btn_bg']    = $request->input('cta_btn_bg',   $settings['colors']['cta_btn_bg']   ?? config('branding.colors.cta_btn_bg'));
         $settings['colors']['cta_btn_text']  = $request->input('cta_btn_text', $settings['colors']['cta_btn_text'] ?? config('branding.colors.cta_btn_text'));
+        $settings['colors']['body_bg']       = $request->input('body_bg',      $settings['colors']['body_bg']      ?? config('branding.colors.body_bg'));
+        $settings['colors']['body_text']     = $request->input('body_text',    $settings['colors']['body_text']    ?? config('branding.colors.body_text'));
+        $settings['colors']['card_bg']       = $request->input('card_bg',      $settings['colors']['card_bg']      ?? config('branding.colors.card_bg'));
 
         // Font opslaan
         $fontKey = $request->input('font_family', 'Arial');

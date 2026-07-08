@@ -23,6 +23,9 @@
         $bCtaText      = $bs['colors']['cta_text']        ?? '#ffffff';
         $bCtaBtnBg     = $bs['colors']['cta_btn_bg']      ?? config('branding.colors.cta_btn_bg');
         $bCtaBtnText   = $bs['colors']['cta_btn_text']    ?? config('branding.colors.cta_btn_text');
+        $bBodyBg       = $bs['colors']['body_bg']         ?? config('branding.colors.body_bg');
+        $bBodyText     = $bs['colors']['body_text']       ?? config('branding.colors.body_text');
+        $bCardBg       = $bs['colors']['card_bg']         ?? config('branding.colors.card_bg');
         $bFontFamily   = $bs['fonts']['family']           ?? config('branding.fonts.family');
         $bFontGoogle   = $bs['fonts']['google']           ?? config('branding.fonts.google');
         $bFooterFacebook  = $bs['footer_facebook']  ?? '';
@@ -78,6 +81,9 @@
             --color-cta-text:      {{ $bCtaText }};
             --color-cta-btn-bg:    {{ $bCtaBtnBg }};
             --color-cta-btn-text:  {{ $bCtaBtnText }};
+            --color-body-bg:       {{ $bBodyBg }};
+            --color-body-text:     {{ $bBodyText }};
+            --color-card-bg:       {{ $bCardBg }};
             --font-family:         {{ $bFontFamily }};
             --header-image:        url('{{ $bHeaderImage }}');
         }

@@ -35,6 +35,9 @@ return [
         'cta_bg'        => '#1a1a1a',
         'cta_btn_bg'    => '#b8930a',
         'cta_btn_text'  => '#ffffff',
+        'body_bg'       => '#ffffff',
+        'body_text'     => '#1a1a1a',
+        'card_bg'       => '#ffffff',
     ],
 
     /*

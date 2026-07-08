@@ -278,11 +278,14 @@
             <p class="db-label" style="margin-bottom:14px;">Algemeen</p>
             <div class="db-colors-grid" style="margin-bottom:28px;">
                 @foreach([
-                    ['primary_color', 'Hoofdkleur',         $settings['colors']['primary']   ?? '#111111', 'primary_hex'],
-                    ['accent_color',  'Accentkleur',        $settings['colors']['accent']    ?? '#111111', 'accent_hex'],
-                    ['header_bg',     'Header achtergrond', $settings['colors']['header_bg'] ?? '#ffffff', 'header_bg_hex'],
-                    ['header_text',   'Header tekst',       $settings['colors']['header_text']?? '#ffffff','header_text_hex'],
-                    ['footer_bg',     'Footer achtergrond', $settings['colors']['footer_bg'] ?? '#2d3142', 'footer_bg_hex'],
+                    ['primary_color', 'Hoofdkleur',           $settings['colors']['primary']    ?? '#b8930a', 'primary_hex'],
+                    ['accent_color',  'Accentkleur',          $settings['colors']['accent']     ?? '#b8930a', 'accent_hex'],
+                    ['body_bg',       'Pagina achtergrond',   $settings['colors']['body_bg']    ?? '#ffffff', 'body_bg_hex'],
+                    ['body_text',     'Pagina tekst',         $settings['colors']['body_text']  ?? '#1a1a1a', 'body_text_hex'],
+                    ['card_bg',       'Kaart achtergrond',    $settings['colors']['card_bg']    ?? '#ffffff', 'card_bg_hex'],
+                    ['header_bg',     'Header achtergrond',   $settings['colors']['header_bg']  ?? '#f5f0e8', 'header_bg_hex'],
+                    ['header_text',   'Header tekst',         $settings['colors']['header_text']?? '#1a1a1a', 'header_text_hex'],
+                    ['footer_bg',     'Footer achtergrond',   $settings['colors']['footer_bg']  ?? '#f5f0e8', 'footer_bg_hex'],
                 ] as [$name, $clabel, $val, $hexId])
                 <div class="db-color-item">
                     <span class="db-color-label">{{ $clabel }}</span>
