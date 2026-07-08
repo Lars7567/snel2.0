@@ -144,9 +144,9 @@
 
 {{-- Hero --}}
 <div class="ct-hero">
-    <span class="ct-hero__label">Contact</span>
-    <h1 class="ct-hero__titel">Neem contact op</h1>
-    <p class="ct-hero__sub">Heb je een vraag, opmerking of wil je jouw bedrijf aanmelden? Stuur ons een bericht.</p>
+    <span class="ct-hero__label">{{ \App\Helpers\ContentHelper::get('contact_hero_label', 'Contact') }}</span>
+    <h1 class="ct-hero__titel">{{ \App\Helpers\ContentHelper::get('contact_hero_titel', 'Neem contact op') }}</h1>
+    <p class="ct-hero__sub">{{ \App\Helpers\ContentHelper::get('contact_hero_sub', 'Heb je een vraag, opmerking of wil je jouw bedrijf aanmelden? Stuur ons een bericht.') }}</p>
 </div>
 
 {{-- Body --}}
@@ -155,24 +155,44 @@
 
         {{-- Info --}}
         <div>
-            <p class="ct-info__titel">Hoe kunnen we helpen?</p>
-            <p class="ct-info__sub">We reageren doorgaans binnen één werkdag op jouw bericht.</p>
+            <p class="ct-info__titel">{{ \App\Helpers\ContentHelper::get('contact_info_titel', 'Hoe kunnen we helpen?') }}</p>
+            <p class="ct-info__sub">{{ \App\Helpers\ContentHelper::get('contact_info_sub', 'We reageren doorgaans binnen één werkdag op jouw bericht.') }}</p>
 
+            @php
+                $brandingFile = storage_path('app/branding.json');
+                $ctBs = file_exists($brandingFile) ? (json_decode(file_get_contents($brandingFile), true) ?? []) : [];
+                $ctEmail = $ctBs['contact_email'] ?? '';
+                $ctPhone = $ctBs['site_phone'] ?? '';
+                $ctHours = $ctBs['site_hours'] ?? '';
+            @endphp
             <div class="ct-info__items">
+                @if($ctEmail)
                 <div class="ct-info__item">
                     <div class="ct-info__ico"><i class="fa-solid fa-envelope"></i></div>
                     <div>
                         <p class="ct-info__item-titel">E-mail</p>
-                        <p class="ct-info__item-tekst">info@snelopzoek.net</p>
+                        <p class="ct-info__item-tekst">{{ $ctEmail }}</p>
                     </div>
                 </div>
+                @endif
+                @if($ctPhone)
+                <div class="ct-info__item">
+                    <div class="ct-info__ico"><i class="fa-solid fa-phone"></i></div>
+                    <div>
+                        <p class="ct-info__item-titel">Telefoon</p>
+                        <p class="ct-info__item-tekst">{{ $ctPhone }}</p>
+                    </div>
+                </div>
+                @endif
+                @if($ctHours)
                 <div class="ct-info__item">
                     <div class="ct-info__ico"><i class="fa-solid fa-clock"></i></div>
                     <div>
-                        <p class="ct-info__item-titel">Reactietijd</p>
-                        <p class="ct-info__item-tekst">Binnen 1 werkdag</p>
+                        <p class="ct-info__item-titel">Openingstijden</p>
+                        <p class="ct-info__item-tekst">{{ $ctHours }}</p>
                     </div>
                 </div>
+                @endif
                 <div class="ct-info__item">
                     <div class="ct-info__ico"><i class="fa-solid fa-store"></i></div>
                     <div>

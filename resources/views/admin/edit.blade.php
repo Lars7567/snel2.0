@@ -1,105 +1,218 @@
 <x-base-layout>
-        <div class="company">
-            <div class="company__container">
 
-                <h1>Bedrijf bewerken</h1>
+<style>
+.af *:not(i) { font-family: 'Plus Jakarta Sans', sans-serif; box-sizing: border-box; }
 
-                @if($errors->any())
-                    <div class="company__errors">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+.af-wrap  { display: flex; justify-content: center; padding: 50px 20px 100px; }
+.af-inner { width: 100%; max-width: 720px; }
+
+.af-topbar { display: flex; align-items: center; gap: 20px; margin-bottom: 32px; flex-wrap: wrap; }
+.af-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: #6b7280; font-size: 13px; font-weight: 600; text-decoration: none;
+    padding: 8px 14px; border: 1.5px solid #e5e7eb; border-radius: 50px;
+    transition: border-color 0.15s, color 0.15s; flex-shrink: 0;
+}
+.af-back:hover { border-color: #1a1a1a; color: #1a1a1a; }
+.af-back i { font-size: 11px; }
+.af-title { font-size: 1.7rem; font-weight: 900; color: #111; letter-spacing: -0.03em; margin: 0; }
+
+.af-alert-err { background: #fef2f2; border: 1.5px solid #fecaca; color: #991b1b; border-radius: 10px; padding: 12px 18px; margin-bottom: 20px; font-size: 14px; }
+.af-alert-err ul { margin: 4px 0 0 18px; padding: 0; }
+.af-alert-err li { font-size: 13px; margin-bottom: 3px; }
+
+.af-card { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 14px; padding: 26px; margin-bottom: 16px; }
+.af-card-titel { font-size: 13px; font-weight: 700; color: #374151; margin: 0 0 20px; padding-bottom: 14px; border-bottom: 1px solid #f3f4f6; display: flex; align-items: center; gap: 8px; }
+.af-card-titel i { color: #8b7355; font-size: 13px; }
+
+.af-field  { margin-bottom: 16px; }
+.af-field:last-child { margin-bottom: 0; }
+.af-label  { display: block; font-size: 12px; font-weight: 700; color: #374151; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 7px; }
+.af-input, .af-textarea {
+    width: 100%; padding: 10px 14px;
+    border: 1.5px solid #e5e7eb; border-radius: 8px;
+    font-size: 14px; color: #1a1a1a;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #fafafa; outline: none;
+    transition: border-color 0.15s, background 0.15s;
+}
+.af-input:focus, .af-textarea:focus { border-color: #1a1a1a; background: #fff; }
+.af-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+.af-input[type="file"] { background: #fff; cursor: pointer; font-size: 13px; padding: 8px 12px; }
+
+.af-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 520px) { .af-row { grid-template-columns: 1fr; } }
+
+.af-img-preview { max-width: 180px; max-height: 120px; border: 1.5px solid #e5e7eb; border-radius: 8px; display: block; margin-bottom: 12px; object-fit: cover; }
+.af-img-label { font-size: 12px; color: #9ca3af; font-weight: 500; margin: 0 0 8px; }
+
+.af-checks { display: flex; flex-wrap: wrap; gap: 8px; }
+.af-check-label {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 7px 14px; border: 1.5px solid #e5e7eb; border-radius: 50px;
+    cursor: pointer; font-size: 13px; font-weight: 600; color: #6b7280;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    user-select: none;
+}
+.af-check-label input { display: none; }
+.af-check-label:has(input:checked) { border-color: #1a1a1a; background: #1a1a1a; color: #fff; }
+.af-check-label:hover { border-color: #9ca3af; color: #1a1a1a; }
+.af-check-label:has(input:checked):hover { background: #333; border-color: #333; }
+
+.af-footer { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+.af-btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #1a1a1a; color: #fff; border: none; cursor: pointer;
+    font-size: 14px; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif;
+    padding: 12px 28px; border-radius: 8px; transition: background 0.15s;
+}
+.af-btn-primary:hover { background: #333; }
+</style>
+
+<div class="af-wrap">
+<div class="af-inner">
+
+    <div class="af-topbar">
+        @if(request('from_plaats'))
+            <a href="{{ route('admin.show', request('from_plaats')) }}" class="af-back"><i class="fa-solid fa-arrow-left"></i> Terug</a>
+        @else
+            <a href="{{ route('admin.index') }}" class="af-back"><i class="fa-solid fa-arrow-left"></i> Terug</a>
+        @endif
+        <h1 class="af-title">{{ $bedrijf->naam }} bewerken</h1>
+    </div>
+
+    @if($errors->any())
+        <div class="af-alert-err">
+            <strong>Controleer de volgende velden:</strong>
+            <ul>@foreach($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul>
+        </div>
+    @endif
+
+    <form action="{{ route('admin.update', $bedrijf->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        <input type="hidden" name="from_plaats" value="{{ request('from_plaats') }}">
+
+        {{-- Algemeen --}}
+        <div class="af-card">
+            <p class="af-card-titel"><i class="fa-solid fa-building"></i> Algemeen</p>
+            <div class="af-field">
+                <label class="af-label">Bedrijfsnaam</label>
+                <input type="text" name="naam" class="af-input" placeholder="Bedrijfsnaam" value="{{ old('naam', $bedrijf->naam) }}">
+            </div>
+            <div class="af-field">
+                <label class="af-label">Afbeelding</label>
+                @if($bedrijf->afbeelding)
+                    <img src="/images/{{ $bedrijf->afbeelding }}" class="af-img-preview" alt="{{ $bedrijf->naam }}">
+                    <p class="af-img-label">Nieuwe afbeelding uploaden om de huidige te vervangen:</p>
                 @endif
-
-                <form action="{{ route('admin.update', $bedrijf->id) }}" method="POST" class="company__form" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <input type="hidden" name="from_plaats" value="{{ request('from_plaats') }}">
-
-                    <div class="company__group">
-                        <input type="text" name="naam" class="company__input" placeholder="Bedrijfsnaam" value="{{$bedrijf->naam}}">
-                    </div>
-
-                    <div class="company__group">
-                        @if($bedrijf->afbeelding)
-                            <div style="margin-bottom: 15px;">
-                                <p style="margin: 0 0 8px 0; font-weight: 600;">Huidige afbeelding:</p>
-                                <img src="/images/{{ $bedrijf->afbeelding }}" style="max-width: 200px; max-height: 150px; border: 1px solid #ddd; border-radius: 4px;">
-                            </div>
-                        @endif
-                        <label style="display: block; margin-bottom: 8px; font-weight: 600;">Kies nieuwe afbeelding (optioneel):</label>
-                        <input type="file" name="afbeelding" class="company__input" accept="image/*">
-                    </div>
-
-                    <div class="company__group">
-                        <textarea name="beschrijving_kort" class="company__textarea" placeholder="Korte beschrijving">{{$bedrijf->beschrijving_kort}}</textarea>
-                    </div>
-
-                    <div class="company__group">
-                        <textarea name="beschrijving_lang" class="company__textarea" placeholder="Lange beschrijving">{{$bedrijf->beschrijving_lang}}</textarea>
-                    </div>
-
-                    <div class="company__group company__group--half">
-                        <input type="text" name="straat" class="company__input" placeholder="Straat" value="{{$bedrijf->straat}}">
-                        <input type="text" name="huisnummer" class="company__input" placeholder="Huisnummer" value="{{$bedrijf->huisnummer}}">
-                    </div>
-
-                    <div class="company__group company__group--half">
-                        <input type="text" name="plaats" class="company__input" placeholder="Plaats" value="{{$bedrijf->plaats}}">
-                        <input type="text" name="postcode" class="company__input" placeholder="Postcode" value="{{$bedrijf->postcode}}">
-                    </div>
-
-                    <div class="company__group">
-                        <input type="text" name="telefoon" class="company__input" placeholder="Telefoonnummer" value="{{$bedrijf->telefoon}}">
-                    </div>
-
-                    <div class="company__group">
-                        <input type="text" name="gsm" class="company__input" placeholder="GSM / Mobiel" value="{{$bedrijf->gsm}}">
-                    </div>
-
-                    <div class="company__group">
-                        <input type="email" name="email" class="company__input" placeholder="Email" value="{{$bedrijf->email}}">
-                    </div>
-
-                    <div class="company__group">
-                        <input type="url" name="website" class="company__input" placeholder="Website URL (optioneel)" value="{{$bedrijf->website}}">
-                    </div>
-
-                    <div class="company__group">
-                        <input type="url" name="facebook" class="company__input" placeholder="Facebook URL (optioneel)" value="{{$bedrijf->facebook}}">
-                    </div>
-
-                    <div class="company__group">
-                        <input type="url" name="linkedin" class="company__input" placeholder="LinkedIn URL (optioneel)" value="{{$bedrijf->linkedin}}">
-                    </div>
-
-                    <div class="company__group">
-                        <input type="url" name="instagram" class="company__input" placeholder="Instagram URL (optioneel)" value="{{$bedrijf->instagram}}">
-                    </div>
-
-                    <div class="company__group">
-                        <label style="display:block; font-weight:600; margin-bottom:8px;">Categorieën <span style="color:#e53e3e">*</span></label>
-                        @php $geselecteerd = old('categorie_ids', $bedrijf->categorieen->pluck('id')->toArray()); @endphp
-                        <div style="display:flex; flex-wrap:wrap; gap:10px;">
-                            @foreach($categorieen as $categorie)
-                                <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
-                                    <input type="checkbox" name="categorie_ids[]" value="{{ $categorie->id }}"
-                                        {{ in_array($categorie->id, $geselecteerd) ? 'checked' : '' }}>
-                                    {{ $categorie->categorie }}
-                                </label>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="company__group">
-                        <button type="submit" class="company__button">
-                            Bedrijf bijwerken
-                        </button>
-                    </div>
-                </form>
+                <input type="file" name="afbeelding" class="af-input" accept="image/*">
             </div>
         </div>
-    </x-base-layout>
+
+        {{-- Beschrijving --}}
+        <div class="af-card">
+            <p class="af-card-titel"><i class="fa-solid fa-align-left"></i> Beschrijving</p>
+            <div class="af-field">
+                <label class="af-label">Korte beschrijving</label>
+                <textarea name="beschrijving_kort" class="af-textarea" rows="3">{{ old('beschrijving_kort', $bedrijf->beschrijving_kort) }}</textarea>
+            </div>
+            <div class="af-field">
+                <label class="af-label">Langere beschrijving</label>
+                <textarea name="beschrijving_lang" class="af-textarea" rows="5">{{ old('beschrijving_lang', $bedrijf->beschrijving_lang) }}</textarea>
+            </div>
+        </div>
+
+        {{-- Locatie --}}
+        <div class="af-card">
+            <p class="af-card-titel"><i class="fa-solid fa-location-dot"></i> Locatie</p>
+            <div class="af-row af-field">
+                <div>
+                    <label class="af-label">Straat</label>
+                    <input type="text" name="straat" class="af-input" placeholder="Kerkstraat" value="{{ old('straat', $bedrijf->straat) }}">
+                </div>
+                <div>
+                    <label class="af-label">Huisnummer</label>
+                    <input type="text" name="huisnummer" class="af-input" placeholder="12A" value="{{ old('huisnummer', $bedrijf->huisnummer) }}">
+                </div>
+            </div>
+            <div class="af-row">
+                <div>
+                    <label class="af-label">Plaats</label>
+                    <input type="text" name="plaats" class="af-input" placeholder="Amsterdam" value="{{ old('plaats', $bedrijf->plaats) }}">
+                </div>
+                <div>
+                    <label class="af-label">Postcode</label>
+                    <input type="text" name="postcode" class="af-input" placeholder="1234 AB" value="{{ old('postcode', $bedrijf->postcode) }}">
+                </div>
+            </div>
+        </div>
+
+        {{-- Contact --}}
+        <div class="af-card">
+            <p class="af-card-titel"><i class="fa-solid fa-phone"></i> Contact</p>
+            <div class="af-row af-field">
+                <div>
+                    <label class="af-label">Telefoon</label>
+                    <input type="text" name="telefoon" class="af-input" placeholder="020 123 4567" value="{{ old('telefoon', $bedrijf->telefoon) }}">
+                </div>
+                <div>
+                    <label class="af-label">Mobiel / GSM</label>
+                    <input type="text" name="gsm" class="af-input" placeholder="06 12345678" value="{{ old('gsm', $bedrijf->gsm) }}">
+                </div>
+            </div>
+            <div class="af-field">
+                <label class="af-label">E-mailadres</label>
+                <input type="email" name="email" class="af-input" placeholder="info@bedrijf.nl" value="{{ old('email', $bedrijf->email) }}">
+            </div>
+        </div>
+
+        {{-- Online --}}
+        <div class="af-card">
+            <p class="af-card-titel"><i class="fa-solid fa-globe"></i> Online aanwezigheid</p>
+            <div class="af-field">
+                <label class="af-label">Website</label>
+                <input type="text" name="website" class="af-input" placeholder="https://www.bedrijf.nl" value="{{ old('website', $bedrijf->website) }}">
+            </div>
+            <div class="af-row af-field">
+                <div>
+                    <label class="af-label"><i class="fa-brands fa-facebook-f"></i> Facebook</label>
+                    <input type="text" name="facebook" class="af-input" placeholder="https://facebook.com/..." value="{{ old('facebook', $bedrijf->facebook) }}">
+                </div>
+                <div>
+                    <label class="af-label"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</label>
+                    <input type="text" name="linkedin" class="af-input" placeholder="https://linkedin.com/..." value="{{ old('linkedin', $bedrijf->linkedin) }}">
+                </div>
+            </div>
+            <div class="af-field">
+                <label class="af-label"><i class="fa-brands fa-instagram"></i> Instagram</label>
+                <input type="text" name="instagram" class="af-input" placeholder="https://instagram.com/..." value="{{ old('instagram', $bedrijf->instagram) }}">
+            </div>
+        </div>
+
+        {{-- Categorieën --}}
+        <div class="af-card">
+            <p class="af-card-titel"><i class="fa-solid fa-tag"></i> Categorieën</p>
+            @php $geselecteerd = old('categorie_ids', $bedrijf->categorieen->pluck('id')->toArray()); @endphp
+            <div class="af-checks">
+                @foreach($categorieen as $categorie)
+                    <label class="af-check-label">
+                        <input type="checkbox" name="categorie_ids[]" value="{{ $categorie->id }}"
+                            {{ in_array($categorie->id, $geselecteerd) ? 'checked' : '' }}>
+                        {{ $categorie->categorie }}
+                    </label>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="af-footer">
+            <button type="submit" class="af-btn-primary">
+                <i class="fa-solid fa-floppy-disk"></i> Wijzigingen opslaan
+            </button>
+        </div>
+
+    </form>
+</div>
+</div>
+
+</x-base-layout>

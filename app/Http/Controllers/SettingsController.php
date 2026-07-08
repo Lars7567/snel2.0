@@ -45,6 +45,8 @@ class SettingsController extends Controller
     {
         $request->validate([
             'contact_email'    => ['required', 'email', 'max:255'],
+            'site_phone'       => ['nullable', 'string', 'max:50'],
+            'site_hours'       => ['nullable', 'string', 'max:100'],
             'mail_host'        => ['nullable', 'string', 'max:255'],
             'mail_port'        => ['nullable', 'integer'],
             'mail_username'    => ['nullable', 'string', 'max:255'],
@@ -61,6 +63,8 @@ class SettingsController extends Controller
 
         $settings = $this->loadSettings();
         $settings['contact_email']    = $request->input('contact_email');
+        $settings['site_phone']       = $request->input('site_phone', '');
+        $settings['site_hours']       = $request->input('site_hours', '');
         $settings['mail_type']        = $request->input('mail_type', 'phpmail');
         $settings['mail_from_address'] = $request->input('mail_from_address', '');
         $settings['mail_from_name']   = $request->input('mail_from_name', 'Bedrijfsvermelding');
@@ -153,38 +157,6 @@ class SettingsController extends Controller
             if ($request->ajax()) return response()->json(['success' => false, 'message' => $msg]);
             return back()->with('mail_test_error', $msg);
         }
-    }
-
-    public function getBevDefaults()
-    {
-        $settings = $this->loadSettings();
-        return response()->json($settings['bev_defaults'] ?? []);
-    }
-
-    public function updateBevDefaults(Request $request)
-    {
-        $settings = $this->loadSettings();
-        $settings['bev_defaults'] = [
-            'selLogo'  => (int) $request->input('selLogo', 0),
-            'eBedrijf' => $request->input('eBedrijf', ''),
-            'eAdres'   => $request->input('eAdres', ''),
-            'ePostcode'=> $request->input('ePostcode', ''),
-            'ePlaats'  => $request->input('ePlaats', ''),
-            'eLand'    => $request->input('eLand', ''),
-            'eEmail'   => $request->input('eEmail', ''),
-            'eTel'     => $request->input('eTel', ''),
-            'eWebsite' => $request->input('eWebsite', ''),
-            'eKvk'     => $request->input('eKvk', ''),
-            'eBtw'     => $request->input('eBtw', ''),
-            'eIban'    => $request->input('eIban', ''),
-            'dIntro'   => $request->input('dIntro', ''),
-        ];
-        file_put_contents($this->storagePath, json_encode($settings, JSON_PRETTY_PRINT));
-
-        if ($request->ajax() || $request->wantsJson()) {
-            return response()->json(['success' => true, 'message' => 'Standaardgegevens opgeslagen!']);
-        }
-        return redirect()->route('admin.settings')->with('success', 'Standaardgegevens opgeslagen!');
     }
 
     private function loadSettings(): array

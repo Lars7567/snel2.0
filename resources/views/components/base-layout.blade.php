@@ -29,6 +29,9 @@
         $bFooterInstagram = $bs['footer_instagram'] ?? '';
         $bFooterLinkedin  = $bs['footer_linkedin']  ?? '';
         $bFooterTwitter   = $bs['footer_twitter']   ?? '';
+        $bPhone           = $bs['site_phone']       ?? '';
+        $bHours           = $bs['site_hours']       ?? '';
+        $bContactEmail    = $bs['contact_email']    ?? '';
 
         $bTemplate = $bs['template'] ?? config('branding.template', 'modern');
         $cookieTheme = request()->cookie('template');
@@ -56,6 +59,8 @@
         <link rel="stylesheet" href="/themes/retro.css">
     @elseif($bTemplate === 'helder')
         <link rel="stylesheet" href="/themes/helder.css">
+    @elseif($bTemplate === 'snel')
+        <link rel="stylesheet" href="/themes/snel.css">
     @else
         <link rel="stylesheet" href="/style.css">
     @endif
@@ -104,7 +109,7 @@
         }
         .topbar__inner a,
         .topbar__inner span {
-            color: #9ca3af;
+            color: #fff;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -129,12 +134,11 @@
 
         /* ── Hoofdheader ─────────────────────────────────── */
         .site-header {
+            background: #f5f0e8;
+            width: 100%;
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: #f5f0e8;
-            width: 100%;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
         }
         .site-header__inner {
             max-width: 1250px;
@@ -283,7 +287,8 @@
             background: #f5f3ff;
             color: var(--color-accent, #6366f1) !important;
         }
-        .site-header__dropdown.open .site-header__dropdown-menu { display: block; }
+        .site-header__dropdown.open .site-header__dropdown-menu,
+        .site-header__dropdown:hover .site-header__dropdown-menu { display: block; }
 
         /* CTA knop rechts */
         .site-header__cta-btn {
@@ -451,38 +456,49 @@
 <body class="body theme-retro">
 @elseif($bTemplate === 'helder')
 <body class="body theme-helder">
+@elseif($bTemplate === 'snel')
+<body class="body theme-snel">
 @else
 <body class="body theme-modern">
 @endif
 
-{{-- ── Topbalk (niet sticky) ───────────────────────────────── --}}
-@php $bEmail = 'info@' . strtolower(str_replace(' ', '', $bSiteName)) . '.nl'; @endphp
+{{-- ── Topbalk (altijd zichtbaar, niet sticky) ─────────────── --}}
 <div class="topbar">
     <div class="topbar__inner">
-        <span><i class="fa-solid fa-phone"></i> 06 000 000 00</span>
-        <div class="topbar__sep"></div>
-        <a href="mailto:{{ $bEmail }}"><i class="fa-solid fa-envelope"></i> {{ $bEmail }}</a>
-        <div class="topbar__sep"></div>
-        <span><i class="fa-regular fa-clock"></i> Ma–Vr: 09:00–17:00</span>
-        @if($bFooterInstagram || $bFooterFacebook || $bFooterLinkedin || $bFooterTwitter)
+        @if($bPhone)
+            <span><i class="fa-solid fa-phone"></i> {{ $bPhone }}</span>
+            @if($bContactEmail || $bHours || $bFooterInstagram || $bFooterFacebook || $bFooterLinkedin || $bFooterTwitter)
             <div class="topbar__sep"></div>
-            @if($bFooterInstagram)
-                <a href="{{ $bFooterInstagram }}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
             @endif
-            @if($bFooterFacebook)
-                <a href="{{ $bFooterFacebook }}" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i></a>
+        @endif
+        @if($bContactEmail)
+            <a href="mailto:{{ $bContactEmail }}"><i class="fa-solid fa-envelope"></i> {{ $bContactEmail }}</a>
+            @if($bHours || $bFooterInstagram || $bFooterFacebook || $bFooterLinkedin || $bFooterTwitter)
+            <div class="topbar__sep"></div>
             @endif
-            @if($bFooterLinkedin)
-                <a href="{{ $bFooterLinkedin }}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+        @endif
+        @if($bHours)
+            <span><i class="fa-regular fa-clock"></i> {{ $bHours }}</span>
+            @if($bFooterInstagram || $bFooterFacebook || $bFooterLinkedin || $bFooterTwitter)
+            <div class="topbar__sep"></div>
             @endif
-            @if($bFooterTwitter)
-                <a href="{{ $bFooterTwitter }}" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a>
-            @endif
+        @endif
+        @if($bFooterInstagram)
+            <a href="{{ $bFooterInstagram }}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+        @endif
+        @if($bFooterFacebook)
+            <a href="{{ $bFooterFacebook }}" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i></a>
+        @endif
+        @if($bFooterLinkedin)
+            <a href="{{ $bFooterLinkedin }}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+        @endif
+        @if($bFooterTwitter)
+            <a href="{{ $bFooterTwitter }}" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a>
         @endif
     </div>
 </div>
 
-{{-- ── Sticky hoofdheader ──────────────────────────────────── --}}
+{{-- ── Hoofdheader (sticky) ────────────────────────────────── --}}
 <header class="site-header">
     <div class="site-header__inner">
 
@@ -493,8 +509,6 @@
         @if(auth()->check())
             <nav class="site-header__nav">
                 <a href="{{ route('admin.index') }}" class="site-header__admin-link">Dashboard</a>
-                <a href="{{ route('admin.settings') }}" class="site-header__admin-link">Instellingen</a>
-                <a href="{{ route('admin.bevestigingen.index') }}" class="site-header__admin-link">Bevestigingen</a>
                 <div class="site-header__dropdown">
                     <a href="#" class="site-header__dropdown-toggle">Toevoegen &#x25BE;</a>
                     <div class="site-header__dropdown-menu">
@@ -502,6 +516,7 @@
                         <a href="{{ route('admin.newCategorie') }}">Categorie toevoegen</a>
                     </div>
                 </div>
+                <a href="{{ route('admin.settings') }}" class="site-header__admin-link">Instellingen</a>
             </nav>
             <div class="site-header__actions">
                 <form method="POST" action="{{ route('logout') }}">
@@ -518,7 +533,7 @@
             </nav>
             <div class="site-header__actions">
                 <a href="{{ route('contact.index') }}" class="site-header__cta-btn">
-                    Gratis aanmelden
+                    Aanmelden
                 </a>
                 <button class="site-header__hamburger" id="hamburger" aria-label="Menu">
                     <i class="fa-solid fa-bars"></i>
@@ -528,19 +543,19 @@
 
     </div>
 
-    {{-- Zoekbalk onder de nav (verborgen op pagina's met eigen zoekbalk) --}}
-    @if(!auth()->check() && !request()->routeIs('bedrijven.index'))
-    <div class="site-header__searchbar">
-        <form action="{{ route('bedrijven.index') }}" method="GET" class="site-header__searchbar-inner">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" name="soort_bedrijf" placeholder="Zoek een bedrijf of categorie...">
-            <div class="site-header__searchbar-divider"></div>
-            <input type="text" name="plaats" placeholder="Plaats" class="search-input-plaats">
-            <button type="submit" class="site-header__search-btn">Zoeken</button>
-        </form>
-    </div>
-    @endif
 </header>
+
+@if(!auth()->check() && !request()->routeIs('bedrijven.index', 'login', 'register'))
+<div class="site-header__searchbar">
+    <form action="{{ route('bedrijven.index') }}" method="GET" class="site-header__searchbar-inner">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" name="soort_bedrijf" placeholder="Zoek een bedrijf of categorie...">
+        <div class="site-header__searchbar-divider"></div>
+        <input type="text" name="plaats" placeholder="Plaats" class="search-input-plaats">
+        <button type="submit" class="site-header__search-btn">Zoeken</button>
+    </form>
+</div>
+@endif
 
 <main class="main">
     <div class="main-inner">
@@ -640,6 +655,7 @@
     };
     document.addEventListener('DOMContentLoaded', init);
 })();
+
 
 document.addEventListener('DOMContentLoaded', function() {
     // Dropdown (admin)

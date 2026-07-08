@@ -1,9 +1,9 @@
 <x-base-layout>
 
 <div class="bvn-hero">
-    <span class="bvn-hero__label">Overzicht</span>
-    <h1 class="bvn-hero__titel">Alle bedrijven</h1>
-    <p class="bvn-hero__sub">Zoek, filter en ontdek lokale bedrijven in jouw regio.</p>
+    <span class="bvn-hero__label">{{ \App\Helpers\ContentHelper::get('bedrijven_hero_label', 'Overzicht') }}</span>
+    <h1 class="bvn-hero__titel">{{ \App\Helpers\ContentHelper::get('bedrijven_hero_titel', 'Alle bedrijven') }}</h1>
+    <p class="bvn-hero__sub">{{ \App\Helpers\ContentHelper::get('bedrijven_hero_sub', 'Zoek, filter en ontdek lokale bedrijven in jouw regio.') }}</p>
 </div>
 
 <section class="bvn-sectie">

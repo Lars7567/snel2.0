@@ -1,9 +1,9 @@
 <x-base-layout>
 
 <div class="bdr-hero">
-    <span class="bdr-hero__label">Ontdek</span>
-    <h1 class="bdr-hero__titel">Lokale bedrijven<br>snel gevonden</h1>
-    <p class="bdr-hero__sub">Vind de beste bedrijven bij jou in de buurt — betrouwbaar, overzichtelijk en altijd actueel.</p>
+    <span class="bdr-hero__label">{{ \App\Helpers\ContentHelper::get('home_hero_label', 'Ontdek') }}</span>
+    <h1 class="bdr-hero__titel">{!! nl2br(e(\App\Helpers\ContentHelper::get('home_hero_titel', 'Lokale bedrijven snel gevonden'))) !!}</h1>
+    <p class="bdr-hero__sub">{{ \App\Helpers\ContentHelper::get('home_hero_sub', 'Vind de beste bedrijven bij jou in de buurt — betrouwbaar, overzichtelijk en altijd actueel.') }}</p>
 </div>
 
 <section class="bdr-sectie">

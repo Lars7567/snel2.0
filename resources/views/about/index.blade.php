@@ -133,9 +133,9 @@
 
 {{-- Hero --}}
 <div class="ao-hero">
-    <span class="ao-hero__label">Over ons</span>
-    <h1 class="ao-hero__titel">Bedrijven snel<br>en eenvoudig vinden</h1>
-    <p class="ao-hero__sub">SnelopZoek.net verbindt ondernemers met klanten in de buurt. Betrouwbaar, overzichtelijk en altijd actueel.</p>
+    <span class="ao-hero__label">{{ \App\Helpers\ContentHelper::get('about_hero_label', 'Over ons') }}</span>
+    <h1 class="ao-hero__titel">{!! nl2br(e(\App\Helpers\ContentHelper::get('about_hero_titel', 'Bedrijven snel en eenvoudig vinden'))) !!}</h1>
+    <p class="ao-hero__sub">{{ \App\Helpers\ContentHelper::get('about_hero_sub', 'SnelopZoek.net verbindt ondernemers met klanten in de buurt. Betrouwbaar, overzichtelijk en altijd actueel.') }}</p>
 </div>
 
 {{-- 3 blokken --}}
@@ -143,18 +143,18 @@
     <div class="ao-blokken__inner">
         <div class="ao-blok">
             <div class="ao-blok__ico"><i class="fa-solid fa-shield-halved"></i></div>
-            <h3 class="ao-blok__titel">Betrouwbaarheid</h3>
-            <p class="ao-blok__tekst">Alle bedrijven op ons platform worden zorgvuldig gecontroleerd. Je kunt erop vertrouwen dat de informatie die je hier vindt actueel en correct is. Kwaliteit staat bij ons altijd voorop.</p>
+            <h3 class="ao-blok__titel">{{ \App\Helpers\ContentHelper::get('about_blok1_titel', 'Betrouwbaarheid') }}</h3>
+            <p class="ao-blok__tekst">{{ \App\Helpers\ContentHelper::get('about_blok1_tekst', 'Alle bedrijven op ons platform worden zorgvuldig gecontroleerd. Je kunt erop vertrouwen dat de informatie die je hier vindt actueel en correct is. Kwaliteit staat bij ons altijd voorop.') }}</p>
         </div>
         <div class="ao-blok">
             <div class="ao-blok__ico"><i class="fa-solid fa-briefcase"></i></div>
-            <h3 class="ao-blok__titel">Aanbod</h3>
-            <p class="ao-blok__tekst">Van loodgieters tot schilders, van kappers tot aannemers — ons platform biedt een breed en divers aanbod van lokale bedrijven. Voor elke klus of vraag vind je hier de juiste professional.</p>
+            <h3 class="ao-blok__titel">{{ \App\Helpers\ContentHelper::get('about_blok2_titel', 'Aanbod') }}</h3>
+            <p class="ao-blok__tekst">{{ \App\Helpers\ContentHelper::get('about_blok2_tekst', 'Van loodgieters tot schilders, van kappers tot aannemers — ons platform biedt een breed en divers aanbod van lokale bedrijven. Voor elke klus of vraag vind je hier de juiste professional.') }}</p>
         </div>
         <div class="ao-blok">
             <div class="ao-blok__ico"><i class="fa-solid fa-bullseye"></i></div>
-            <h3 class="ao-blok__titel">Zichtbaarheid</h3>
-            <p class="ao-blok__tekst">Wij helpen lokale ondernemers om online beter gevonden te worden. Met een profiel op SnelopZoek.net vergroot je jouw bereik en trek je nieuwe klanten aan zonder moeite.</p>
+            <h3 class="ao-blok__titel">{{ \App\Helpers\ContentHelper::get('about_blok3_titel', 'Zichtbaarheid') }}</h3>
+            <p class="ao-blok__tekst">{{ \App\Helpers\ContentHelper::get('about_blok3_tekst', 'Wij helpen lokale ondernemers om online beter gevonden te worden. Met een profiel op SnelopZoek.net vergroot je jouw bereik en trek je nieuwe klanten aan zonder moeite.') }}</p>
         </div>
     </div>
 </section>
@@ -166,10 +166,10 @@
             <i class="fa-solid fa-city"></i>
         </div>
         <div>
-            <span class="ao-verhaal__label">Ons verhaal</span>
-            <h2 class="ao-verhaal__titel">Lokale bedrijven verdienen een sterk podium</h2>
-            <p class="ao-verhaal__tekst">SnelopZoek.net is ontstaan vanuit een simpele gedachte: lokale ondernemers verdienen meer zichtbaarheid. Veel kwalitatieve bedrijven zijn moeilijk te vinden, terwijl klanten juist op zoek zijn naar betrouwbare professionals in hun buurt.</p>
-            <p class="ao-verhaal__tekst">Ons platform brengt vraag en aanbod samen op een overzichtelijke manier. Of je nu een aannemer zoekt voor een verbouwing of een schilder voor je gevel — bij SnelopZoek.net vind je snel de juiste partij.</p>
+            <span class="ao-verhaal__label">{{ \App\Helpers\ContentHelper::get('about_verhaal_label', 'Ons verhaal') }}</span>
+            <h2 class="ao-verhaal__titel">{{ \App\Helpers\ContentHelper::get('about_verhaal_titel', 'Lokale bedrijven verdienen een sterk podium') }}</h2>
+            <p class="ao-verhaal__tekst">{{ \App\Helpers\ContentHelper::get('about_verhaal_tekst1', 'SnelopZoek.net is ontstaan vanuit een simpele gedachte: lokale ondernemers verdienen meer zichtbaarheid. Veel kwalitatieve bedrijven zijn moeilijk te vinden, terwijl klanten juist op zoek zijn naar betrouwbare professionals in hun buurt.') }}</p>
+            <p class="ao-verhaal__tekst">{{ \App\Helpers\ContentHelper::get('about_verhaal_tekst2', 'Ons platform brengt vraag en aanbod samen op een overzichtelijke manier. Of je nu een aannemer zoekt voor een verbouwing of een schilder voor je gevel — bij SnelopZoek.net vind je snel de juiste partij.') }}</p>
         </div>
     </div>
 </section>
@@ -177,8 +177,8 @@
 {{-- CTA --}}
 <section class="ao-cta">
     <div class="ao-cta__inner">
-        <h2 class="ao-cta__titel">Staat jouw bedrijf er al bij?</h2>
-        <p class="ao-cta__sub">Meld je gratis aan en word gevonden door honderden potentiële klanten in jouw regio.</p>
+        <h2 class="ao-cta__titel">{{ \App\Helpers\ContentHelper::get('about_cta_titel', 'Staat jouw bedrijf er al bij?') }}</h2>
+        <p class="ao-cta__sub">{{ \App\Helpers\ContentHelper::get('about_cta_sub', 'Meld je gratis aan en word gevonden door honderden potentiële klanten in jouw regio.') }}</p>
         <a href="{{ route('contact.index') }}" class="ao-cta__btn">
             Gratis aanmelden <i class="fa-solid fa-arrow-right"></i>
         </a>

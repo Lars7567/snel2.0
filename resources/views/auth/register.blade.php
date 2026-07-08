@@ -1,52 +1,105 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+<x-base-layout>
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+<style>
+.reg *:not(i) { font-family: 'Plus Jakarta Sans', sans-serif; box-sizing: border-box; }
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+.reg-wrap {
+    min-height: calc(100vh - 200px);
+    background: #f5f0e8;
+    display: flex; align-items: center; justify-content: center;
+    padding: 48px 24px;
+}
+.reg-card {
+    background: #fff; border: 1px solid #ece9e3;
+    border-radius: 20px; padding: 44px 40px;
+    width: 100%; max-width: 440px;
+}
+.reg-card__titel {
+    font-size: 26px; font-weight: 900;
+    color: #1a1a1a; letter-spacing: -0.03em;
+    margin: 0 0 6px;
+}
+.reg-card__sub {
+    font-size: 14px; color: #6b7280;
+    margin: 0 0 32px; line-height: 1.6;
+}
+.reg-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+.reg-label {
+    font-size: 12px; font-weight: 700; color: #1a1a1a;
+    letter-spacing: 0.06em; text-transform: uppercase;
+}
+.reg-input {
+    background: #f9f7f3; border: 1.5px solid #ece9e3;
+    border-radius: 10px; padding: 12px 16px;
+    font-size: 14px; color: #1a1a1a;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    outline: none; transition: border-color 0.18s; width: 100%;
+}
+.reg-input:focus { border-color: #8b7355; }
+.reg-error { font-size: 12px; color: #991b1b; }
+.reg-btn {
+    width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: #1a1a1a; color: #fff; border: none; cursor: pointer;
+    font-size: 14px; font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    padding: 14px 24px; border-radius: 50px; letter-spacing: 0.03em;
+    transition: background 0.18s, transform 0.18s; margin-top: 8px;
+}
+.reg-btn:hover { background: #333; transform: translateY(-2px); }
+.reg-back {
+    display: block; text-align: center; margin-top: 20px;
+    font-size: 13px; color: #8b7355; text-decoration: none;
+    font-weight: 600;
+}
+.reg-back:hover { color: #1a1a1a; }
+</style>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+<div class="reg-wrap">
+    <div class="reg-card">
+        <h1 class="reg-card__titel">Account aanmaken</h1>
+        <p class="reg-card__sub">Maak het beheerdersaccount aan. Na registratie is deze pagina niet meer toegankelijk.</p>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            <div class="reg-field">
+                <label class="reg-label" for="name">Naam</label>
+                <input type="text" name="name" id="name" class="reg-input"
+                       value="{{ old('name') }}" required autofocus autocomplete="name"
+                       placeholder="Jan Jansen">
+                @error('name')<span class="reg-error">{{ $message }}</span>@enderror
+            </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <div class="reg-field">
+                <label class="reg-label" for="email">E-mailadres</label>
+                <input type="email" name="email" id="email" class="reg-input"
+                       value="{{ old('email') }}" required autocomplete="username"
+                       placeholder="jan@bedrijf.nl">
+                @error('email')<span class="reg-error">{{ $message }}</span>@enderror
+            </div>
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+            <div class="reg-field">
+                <label class="reg-label" for="password">Wachtwoord</label>
+                <input type="password" name="password" id="password" class="reg-input"
+                       required autocomplete="new-password" placeholder="Minimaal 8 tekens">
+                @error('password')<span class="reg-error">{{ $message }}</span>@enderror
+            </div>
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
+            <div class="reg-field">
+                <label class="reg-label" for="password_confirmation">Wachtwoord bevestigen</label>
+                <input type="password" name="password_confirmation" id="password_confirmation"
+                       class="reg-input" required autocomplete="new-password"
+                       placeholder="Herhaal wachtwoord">
+                @error('password_confirmation')<span class="reg-error">{{ $message }}</span>@enderror
+            </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
+            <button type="submit" class="reg-btn">
+                Account aanmaken <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </form>
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+        <a href="{{ route('login') }}" class="reg-back">Al een account? Inloggen</a>
+    </div>
+</div>
+
+</x-base-layout>

@@ -13,7 +13,6 @@ use App\Http\Controllers\SetupController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ExportImportController;
 use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\BevestigingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -45,7 +44,7 @@ Route::post('/setup', [SetupController::class, 'store']);
 // Frontend theme cookie (bezoekers kunnen zelf van template wisselen)
 Route::post('/set-template', function (Request $request) {
     $template = $request->input('template', 'modern');
-    if (!in_array($template, ['modern', 'minimal', 'warm', 'corporate', 'dark', 'retro'])) {
+    if (!in_array($template, ['modern', 'minimal', 'warm', 'corporate', 'dark', 'retro', 'helder', 'snel'])) {
         $template = 'modern';
     }
     return redirect()->back()->withCookie(cookie()->forever('template', $template));
@@ -93,16 +92,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
     Route::post('/settings', [SettingsController::class, 'update'])->name('settings.update');
     Route::post('/settings/test-mail', [SettingsController::class, 'testMail'])->name('settings.test_mail');
-    Route::post('/settings/bev-defaults', [SettingsController::class, 'updateBevDefaults'])->name('settings.bev_defaults');
-    Route::get('/settings/bev-defaults', [SettingsController::class, 'getBevDefaults'])->name('settings.bev_defaults.get');
     Route::get('/offerte-tool', function () {
         return view('admin.offerte-tool');
     })->name('offerte_tool');
-    Route::get('/bevestigingen', [BevestigingController::class, 'index'])->name('bevestigingen.index');
-    Route::post('/bevestigingen', [BevestigingController::class, 'store'])->name('bevestigingen.store');
-    Route::get('/bevestigingen/{bevestiging}', [BevestigingController::class, 'show'])->name('bevestigingen.show');
-    Route::put('/bevestigingen/{bevestiging}', [BevestigingController::class, 'update'])->name('bevestigingen.update');
-    Route::delete('/bevestigingen/{bevestiging}', [BevestigingController::class, 'destroy'])->name('bevestigingen.destroy');
 });
 
 Route::middleware('auth')->group(function () {

@@ -21,9 +21,6 @@
         <button class="db-tab" id="tab-btn-importexport" onclick="switchTab('importexport')">
             <i class="fa-solid fa-file-import"></i> Import / Export
         </button>
-        <button class="db-tab" id="tab-btn-bevestiging" onclick="switchTab('bevestiging')">
-            <i class="fa-solid fa-file-lines"></i> Bevestigingsformulier
-        </button>
     </div>
 
     {{-- ═══════════════════════════════════════
@@ -34,12 +31,24 @@
         @csrf
 
         <div class="db-section">
-            <h2 class="db-section-title">Contactformulier</h2>
-            <p class="db-hint" style="margin-bottom:18px;">Ingevulde contactformulieren worden naar dit adres gestuurd.</p>
+            <h2 class="db-section-title">Contactgegevens</h2>
+            <p class="db-hint" style="margin-bottom:18px;">Deze gegevens verschijnen in de topbalk, de contactpagina en de footer.</p>
+            <div class="db-row">
+                <div class="db-field">
+                    <label class="db-label">Ontvangst e-mailadres</label>
+                    <input type="email" name="contact_email" class="db-input"
+                           value="{{ $settings['contact_email'] ?? '' }}" placeholder="info@snelopzoek.net" required>
+                </div>
+                <div class="db-field">
+                    <label class="db-label">Telefoonnummer <span class="db-hint">(topbalk)</span></label>
+                    <input type="text" name="site_phone" class="db-input"
+                           value="{{ $settings['site_phone'] ?? '' }}" placeholder="06 000 000 00">
+                </div>
+            </div>
             <div class="db-field">
-                <label class="db-label">Ontvangst e-mailadres</label>
-                <input type="email" name="contact_email" class="db-input" style="max-width:400px"
-                       value="{{ $settings['contact_email'] ?? '' }}" placeholder="info@zakenvinder.net" required>
+                <label class="db-label">Openingstijden <span class="db-hint">(topbalk)</span></label>
+                <input type="text" name="site_hours" class="db-input" style="max-width:400px"
+                       value="{{ $settings['site_hours'] ?? '' }}" placeholder="Ma–Vr: 09:00–17:00">
             </div>
         </div>
 
@@ -186,13 +195,14 @@
             @php $currentTemplate = $settings['template'] ?? 'modern'; @endphp
             <div class="tp-picker">
                 @foreach([
+                    'snel'      => ['Snel (huidig)',    'Beige tint, sticky nav, zoekbalk'],
                     'modern'    => ['Modern',          'Donkere header, kaartgrid, CTA-balk'],
                     'minimal'   => ['Minimalistisch',  'Wit, editorial — nav rechts'],
                     'warm'      => ['Warm & Gezellig', 'Aardtinten, afgeronde hoeken'],
                     'corporate' => ['Zakelijk',        'Navy blauw, horizontale kaarten'],
                     'dark'      => ['Indigo / Nacht',  'Dark mode, tech-stijl'],
                     'retro'     => ['Retro',           'Vintage krant-stijl'],
-                    'helder'      => ['Helder',           'Wit, sticky header, rode accenten'],
+                    'helder'    => ['Helder',          'Wit, sticky header, rode accenten'],
                 ] as $tpl => [$label, $desc])
                 <label class="tp-card {{ $currentTemplate === $tpl ? 'tp-selected' : '' }}">
                     <input type="radio" name="template" value="{{ $tpl }}" {{ $currentTemplate === $tpl ? 'checked' : '' }}>
@@ -334,117 +344,69 @@
     <form id="content-form" method="POST" action="{{ route('admin.content.update') }}">
         @csrf
 
+        @php
+            $currentTemplate = $settings['template'] ?? 'modern';
+            $slots = config('template_content.' . $currentTemplate)
+                  ?? config('template_content.default');
+            $sections = collect($slots)->groupBy('section');
+        @endphp
+
+        {{-- Automatisch gegenereerde velden vanuit config/template_content.php --}}
+        @foreach($sections as $sectionName => $fields)
         <div class="db-section">
-            <h2 class="db-section-title">Homepage</h2>
+            <h2 class="db-section-title">{{ $sectionName }}</h2>
+            @foreach($fields as $field)
             <div class="db-field">
-                <label class="db-label">Sectietitel boven</label>
-                <input type="text" name="home_section_top" class="db-input" value="{{ $content['home_section_top'] ?? 'Meest gezochte bedrijven' }}">
+                <label class="db-label">
+                    {{ $field['label'] }}
+                    @if(!empty($field['hint']))<span class="db-hint">({{ $field['hint'] }})</span>@endif
+                    <span class="tc-tag">{{ strtoupper($field['tag']) }}</span>
+                </label>
+                @if($field['type'] === 'textarea')
+                    <textarea name="{{ $field['key'] }}"
+                              class="db-input db-textarea"
+                              rows="3">{{ $content[$field['key']] ?? $field['default'] }}</textarea>
+                @else
+                    <input type="text"
+                           name="{{ $field['key'] }}"
+                           class="db-input"
+                           @if($field['tag'] === 'span') style="max-width:280px" @endif
+                           value="{{ $content[$field['key']] ?? $field['default'] }}">
+                @endif
             </div>
-            <div class="db-field">
-                <label class="db-label">Sectietitel onder</label>
-                <input type="text" name="home_section_bottom" class="db-input" value="{{ $content['home_section_bottom'] ?? 'Meest recente bedrijven' }}">
-            </div>
-            <div class="db-field">
-                <label class="db-label">CTA-tekst</label>
-                <input type="text" name="home_cta_text" class="db-input" value="{{ $content['home_cta_text'] ?? '' }}">
-            </div>
-            <div class="db-field">
-                <label class="db-label">CTA-knop tekst</label>
-                <input type="text" name="home_cta_button" class="db-input" style="max-width:260px" value="{{ $content['home_cta_button'] ?? 'Aanmelden' }}">
-            </div>
+            @endforeach
         </div>
+        @endforeach
 
+        {{-- FAQ (altijd aanwezig, eigen Quill-editor logica) --}}
         <div class="db-section">
-            <h2 class="db-section-title">Over ons</h2>
+            <h2 class="db-section-title">Over ons — FAQ</h2>
             <div class="db-field">
-                <label class="db-label">Paginatitel</label>
-                <input type="text" name="about_title" class="db-input" style="max-width:260px" value="{{ $content['about_title'] ?? 'Over ons' }}">
+                <label class="db-label">Sectietitel <span class="tc-tag">H2</span></label>
+                <input type="text" name="about_faq_title" class="db-input" value="{{ $content['about_faq_title'] ?? 'Veel gestelde vragen' }}">
             </div>
-            <div class="db-field">
-                <label class="db-label">Hero koptekst</label>
-                <input type="text" name="about_hero_headline" class="db-input" value="{{ $content['about_hero_headline'] ?? '' }}">
-            </div>
-            <div class="db-field">
-                <label class="db-label">Hero alinea</label>
-                <div class="db-quill" id="editor-about_hero_text"></div>
-                <input type="hidden" name="about_hero_text" id="hidden-about_hero_text" value="{{ $content['about_hero_text'] ?? '' }}">
-            </div>
-            <div class="db-field">
-                <label class="db-label">Tweede titel</label>
-                <input type="text" name="about_second_title" class="db-input" value="{{ $content['about_second_title'] ?? '' }}">
-            </div>
-            <div class="db-field">
-                <label class="db-label">Tweede alinea</label>
-                <div class="db-quill" id="editor-about_second_text"></div>
-                <input type="hidden" name="about_second_text" id="hidden-about_second_text" value="{{ $content['about_second_text'] ?? '' }}">
-            </div>
-            <div class="db-field">
-                <label class="db-label">Derde titel</label>
-                <input type="text" name="about_third_title" class="db-input" value="{{ $content['about_third_title'] ?? '' }}">
-            </div>
-            <div class="db-field">
-                <label class="db-label">Derde alinea</label>
-                <div class="db-quill" id="editor-about_third_text"></div>
-                <input type="hidden" name="about_third_text" id="hidden-about_third_text" value="{{ $content['about_third_text'] ?? '' }}">
-            </div>
-            <div class="db-field">
-                <label class="db-label">CTA-tekst</label>
-                <input type="text" name="about_cta_text" class="db-input" value="{{ $content['about_cta_text'] ?? '' }}">
-            </div>
-
-            <div style="border-top:1px solid #e5e7eb;margin-top:20px;padding-top:20px;">
-                <p class="db-label">Veel gestelde vragen</p>
-                <div class="db-field">
-                    <label class="db-label" style="font-weight:400;">FAQ-sectietitel</label>
-                    <input type="text" name="about_faq_title" class="db-input" value="{{ $content['about_faq_title'] ?? 'Veel gestelde vragen' }}">
-                </div>
-                <input type="hidden" name="about_faq_count" id="about_faq_count" value="{{ $content['about_faq_count'] ?? 3 }}">
-                <div id="faq-container">
-                    @php $faqCount = (int)($content['about_faq_count'] ?? 3); @endphp
-                    @for($i = 1; $i <= $faqCount; $i++)
-                    <div class="db-faq-block">
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-                            <strong class="faq-label">Vraag {{ $i }}</strong>
-                            <button type="button" onclick="removeFaqBlock(this)" class="db-btn-remove">Verwijderen</button>
-                        </div>
-                        <div class="db-field">
-                            <label class="db-label">Vraag</label>
-                            <input type="text" class="db-input faq-question" value="{{ $content['about_faq_'.$i.'_question'] ?? '' }}">
-                        </div>
-                        <div class="db-field">
-                            <label class="db-label">Antwoord</label>
-                            <div class="db-quill faq-quill-editor"></div>
-                            <input type="hidden" class="faq-answer-hidden" value="{{ $content['about_faq_'.$i.'_answer'] ?? '' }}">
-                        </div>
+            <input type="hidden" name="about_faq_count" id="about_faq_count" value="{{ $content['about_faq_count'] ?? 3 }}">
+            <div id="faq-container">
+                @php $faqCount = (int)($content['about_faq_count'] ?? 3); @endphp
+                @for($i = 1; $i <= $faqCount; $i++)
+                <div class="db-faq-block">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                        <strong class="faq-label">Vraag {{ $i }}</strong>
+                        <button type="button" onclick="removeFaqBlock(this)" class="db-btn-remove">Verwijderen</button>
                     </div>
-                    @endfor
+                    <div class="db-field">
+                        <label class="db-label">Vraag</label>
+                        <input type="text" class="db-input faq-question" value="{{ $content['about_faq_'.$i.'_question'] ?? '' }}">
+                    </div>
+                    <div class="db-field">
+                        <label class="db-label">Antwoord</label>
+                        <div class="db-quill faq-quill-editor"></div>
+                        <input type="hidden" class="faq-answer-hidden" value="{{ $content['about_faq_'.$i.'_answer'] ?? '' }}">
+                    </div>
                 </div>
-                <button type="button" onclick="addFaqBlock()" class="db-btn-outline" style="margin-top:8px;">+ Vraag toevoegen</button>
+                @endfor
             </div>
-        </div>
-
-        <div class="db-section">
-            <h2 class="db-section-title">Contact</h2>
-            <div class="db-field">
-                <label class="db-label">Paginatitel</label>
-                <input type="text" name="contact_title" class="db-input" style="max-width:260px" value="{{ $content['contact_title'] ?? 'Contact' }}">
-            </div>
-            <div class="db-field">
-                <label class="db-label">Adres</label>
-                <input type="text" name="contact_address" class="db-input" value="{{ $content['contact_address'] ?? '' }}">
-            </div>
-            <div class="db-field">
-                <label class="db-label">E-mailadres (contactpagina)</label>
-                <input type="text" name="contact_email" class="db-input" value="{{ $content['contact_email'] ?? '' }}">
-            </div>
-            <div class="db-field">
-                <label class="db-label">Telefoonnummer</label>
-                <input type="text" name="contact_phone" class="db-input" value="{{ $content['contact_phone'] ?? '' }}">
-            </div>
-            <div class="db-field">
-                <label class="db-label">KVK-nummer</label>
-                <input type="text" name="contact_kvk" class="db-input" value="{{ $content['contact_kvk'] ?? '' }}">
-            </div>
+            <button type="button" onclick="addFaqBlock()" class="db-btn-outline" style="margin-top:8px;">+ Vraag toevoegen</button>
         </div>
 
     </form>
@@ -528,58 +490,6 @@
 
     </div>{{-- /panel-importexport --}}
 
-    {{-- ═══════════════════════════════════════
-         TAB 5 — BEVESTIGINGSFORMULIER
-    ═══════════════════════════════════════ --}}
-    <div class="db-panel" id="panel-bevestiging" style="display:none;">
-
-        <div class="db-section">
-            <h2 class="db-section-title">Standaard bedrijfsgegevens</h2>
-            <p class="db-hint" style="margin-bottom:20px;">Deze gegevens worden automatisch ingevuld bij elke nieuwe bevestiging. Je kunt ze per bevestiging nog aanpassen.</p>
-
-            <div class="db-section-title" style="font-size:.9rem;margin-bottom:12px;">Logo</div>
-            <div class="bev-logo-picker" id="bevLogoPickerSettings"></div>
-            <input type="hidden" id="bev_selLogo" value="0">
-
-            <div style="margin-top:22px;border-top:1px solid #e5e7eb;padding-top:22px;">
-                <div class="db-section-title" style="font-size:.9rem;margin-bottom:12px;">Bedrijfsgegevens</div>
-                <div class="db-row">
-                    <div class="db-field"><label class="db-label">Bedrijfsnaam</label><input type="text" id="bev_eBedrijf" class="db-input" placeholder="Bedrijfs-index.net"></div>
-                    <div class="db-field"><label class="db-label">KvK/Kmo Nummer</label><input type="text" id="bev_eKvk" class="db-input" placeholder="88249468"></div>
-                </div>
-                <div class="db-field"><label class="db-label">Adres</label><input type="text" id="bev_eAdres" class="db-input" placeholder="Rembrandtstraat 31"></div>
-                <div class="db-row">
-                    <div class="db-field"><label class="db-label">Postcode</label><input type="text" id="bev_ePostcode" class="db-input" placeholder="1701 JB"></div>
-                    <div class="db-field"><label class="db-label">Plaats</label><input type="text" id="bev_ePlaats" class="db-input" placeholder="Heerhugowaard"></div>
-                    <div class="db-field"><label class="db-label">Land</label><input type="text" id="bev_eLand" class="db-input" placeholder="Nederland"></div>
-                </div>
-                <div class="db-row">
-                    <div class="db-field"><label class="db-label">Telefoon</label><input type="text" id="bev_eTel" class="db-input" placeholder="+31722400003"></div>
-                    <div class="db-field"><label class="db-label">E-mail</label><input type="email" id="bev_eEmail" class="db-input" placeholder="info@bedrijfs-index.net"></div>
-                    <div class="db-field"><label class="db-label">Website</label><input type="text" id="bev_eWebsite" class="db-input" placeholder="www.bedrijfs-index.net"></div>
-                </div>
-                <div class="db-row">
-                    <div class="db-field"><label class="db-label">BTW Nummer</label><input type="text" id="bev_eBtw" class="db-input" placeholder="NL864553201B01"></div>
-                    <div class="db-field"><label class="db-label">IBAN</label><input type="text" id="bev_eIban" class="db-input" placeholder="NL37INGB0113456956"></div>
-                </div>
-            </div>
-
-            <div style="margin-top:22px;border-top:1px solid #e5e7eb;padding-top:22px;">
-                <div class="db-section-title" style="font-size:.9rem;margin-bottom:12px;">Standaard intro tekst</div>
-                <div class="db-field">
-                    <textarea id="bev_dIntro" class="db-input db-textarea" rows="3" placeholder="Hierbij bevestigen wij graag uw opdracht..."></textarea>
-                </div>
-            </div>
-
-            <div style="margin-top:16px;">
-                <button type="button" class="db-btn-primary" onclick="saveBevDefaults()">
-                    <i class="fa-solid fa-floppy-disk"></i> Opslaan
-                </button>
-                <span id="bev-save-msg" style="margin-left:12px;font-size:.85rem;color:#16a34a;display:none;">✓ Opgeslagen!</span>
-            </div>
-        </div>
-
-    </div>{{-- /panel-bevestiging --}}
 
     {{-- ═══ STICKY OPSLAAN BALK ═══ --}}
     <div class="db-savebar" id="savebar">
@@ -619,6 +529,7 @@
 .db-field  { margin-bottom:18px; }
 .db-label  { display:block; font-weight:600; margin-bottom:7px; color:#333; font-size:.88rem; }
 .db-hint   { color:#888; font-size:.83rem; font-weight:400; }
+.tc-tag    { display:inline-block; margin-left:6px; padding:1px 6px; background:#f3f4f6; border:1px solid #e5e7eb; border-radius:4px; font-size:.72rem; font-weight:700; color:#6b7280; letter-spacing:.04em; vertical-align:middle; }
 .db-input  { width:100%; padding:9px 13px; border:1px solid #d1d5db; border-radius:6px; font-size:.93rem; outline:none; box-sizing:border-box; background:#fff; }
 .db-input:focus { border-color:#111; }
 .db-textarea { resize:vertical; font-family:'Courier New',monospace; font-size:.83rem; line-height:1.6; }
@@ -637,6 +548,9 @@
 .tp-selected    { border-color:#111; box-shadow:0 0 0 3px rgba(0,0,0,.07); }
 .tp-thumb   { height:70px; display:flex; flex-direction:column; overflow:hidden; }
 .tp-bar     { height:12px; background:#2d3142; }
+.tp-bar--snel      { background:#0f0f0f; }
+.tp-thumb--snel .tp-body { background:#f5f0e8; }
+.tp-foot--snel     { background:#1a1a1a; }
 .tp-bar--minimal   { background:#fff; border-bottom:1px solid #eee; }
 .tp-bar--warm      { background:#f5ede0; border-bottom:1px solid #e8d9c6; }
 .tp-bar--corporate { background:#0f2341; }
@@ -709,14 +623,6 @@
 /* Savebar */
 .db-savebar { position:sticky; bottom:0; background:#fff; border-top:1px solid #e5e7eb; padding:14px 0; display:flex; align-items:center; gap:16px; z-index:20; }
 
-/* Bevestiging logo picker */
-.bev-lp{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:4px}
-.bev-lc{border:2.5px solid #e2e8f0;border-radius:8px;padding:12px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:8px;background:#fafafa;transition:all .15s;min-height:100px}
-.bev-lc:hover{border-color:#999;background:#f0f0f0}
-.bev-lc.sel{border-color:#111;background:#f0f4ff;box-shadow:0 0 0 3px rgba(0,0,0,.07)}
-.bev-lc img{width:56px;height:56px;object-fit:contain;flex-shrink:0}
-.bev-lc span{font-size:10px;font-weight:600;color:#64748b;text-align:center;line-height:1.3;word-break:break-word}
-
 /* Mail method cards */
 .mail-method-card { flex:1 1 200px; border:2px solid #e5e7eb; border-radius:8px; padding:14px 16px; cursor:pointer; display:flex; flex-direction:column; gap:4px; transition:border-color .15s,background .15s; }
 .mail-method-card input { display:none; }
@@ -743,7 +649,7 @@ function switchTab(name) {
     if (name === 'teksten' && !quillReady) initQuill();
 
     // Savebar hint aanpassen voor import/export tab
-    document.getElementById('savebar').style.display = (name === 'importexport' || name === 'bevestiging') ? 'none' : '';
+    document.getElementById('savebar').style.display = name === 'importexport' ? 'none' : '';
 }
 
 // Herstel tab na reload
@@ -808,18 +714,9 @@ if (fontSel) previewFont(fontSel.value);
 // ── Quill (lazy init bij Teksten tab) ────────────────────
 const toolbarOpts = [['bold','italic','underline'],[{'list':'ordered'},{'list':'bullet'}],['link'],['clean']];
 let quillReady = false;
-const qEditors = {};
 const faqEditors = new Map();
 
 function initQuill() {
-    ['about_hero_text','about_second_text','about_third_text'].forEach(function(field) {
-        const el = document.getElementById('editor-' + field);
-        if (!el) return;
-        const q = new Quill(el, { theme:'snow', modules:{ toolbar: toolbarOpts } });
-        const h = document.getElementById('hidden-' + field);
-        if (h && h.value) q.clipboard.dangerouslyPasteHTML(h.value);
-        qEditors[field] = q;
-    });
     document.querySelectorAll('.ca-faq-block, .db-faq-block').forEach(initFaqQuill);
     quillReady = true;
 }
@@ -847,11 +744,6 @@ function removeFaqBlock(btn) { const b = btn.closest('.db-faq-block'); faqEditor
 function renumberFaq() { document.querySelectorAll('.db-faq-block').forEach((b,i) => b.querySelector('.faq-label').textContent = 'Vraag '+(i+1)); }
 
 function serializeContent() {
-    Object.keys(qEditors).forEach(f => {
-        const h = document.getElementById('hidden-' + f);
-        const html = qEditors[f].root.innerHTML;
-        h.value = html === '<p><br></p>' ? '' : html;
-    });
     const blocks = document.querySelectorAll('.db-faq-block');
     document.getElementById('about_faq_count').value = blocks.length;
     blocks.forEach(function(b, i) {
@@ -924,74 +816,6 @@ async function sendTestMail() {
     } catch(e) { showAlert('Verbindingsfout bij testmail.', 'err'); }
 }
 
-// ── Bevestigingsformulier tab ────────────────────────────
-const BEV_LOGOS = [
-    { name:'Bedrijfsvermelding.net', img:'/images/offerte-logos/bedrijfsvermelding.net.png' },
-    { name:'Zakenvinder.net',        img:'/images/offerte-logos/zakenvinder.net.png' },
-    { name:'Kaart met pins',         img:'/images/offerte-logos/kaart%20met%20pins.png' },
-    { name:'Blauwe hexagon',         img:'/images/offerte-logos/blauwe%20hexagon.png' },
-    { name:'OnlineBedrijvenRegister',img:'/images/offerte-logos/OnlineBedrijvenRegister.nl.png' },
-];
-let bevSelLogo = 0;
-
-function renderBevLogos() {
-    const wrap = document.getElementById('bevLogoPickerSettings');
-    wrap.className = 'bev-lp';
-    wrap.innerHTML = BEV_LOGOS.map((l,i) =>
-        `<div class="bev-lc${i===bevSelLogo?' sel':''}" onclick="pickBevLogo(${i})">
-          <img src="${l.img}" alt="${l.name}">
-          <span>${l.name}</span>
-        </div>`
-    ).join('');
-}
-
-function pickBevLogo(i) {
-    bevSelLogo = i;
-    document.getElementById('bev_selLogo').value = i;
-    document.querySelectorAll('#bevLogoPickerSettings .bev-lc').forEach((el,idx) => el.classList.toggle('sel', idx===i));
-}
-
-async function loadBevDefaults() {
-    try {
-        const r = await fetch('{{ route("admin.settings.bev_defaults.get") }}', { headers:{'Accept':'application/json'} });
-        if (!r.ok) return;
-        const d = await r.json();
-        if (!d || !Object.keys(d).length) return;
-        bevSelLogo = d.selLogo || 0;
-        renderBevLogos();
-        document.getElementById('bev_selLogo').value = bevSelLogo;
-        ['eBedrijf','eAdres','ePostcode','ePlaats','eLand','eEmail','eTel','eWebsite','eKvk','eBtw','eIban','dIntro']
-            .forEach(k => { const el = document.getElementById('bev_'+k); if(el && d[k]) el.value = d[k]; });
-    } catch(e) {}
-}
-
-async function saveBevDefaults() {
-    const btn = event.currentTarget;
-    const msg = document.getElementById('bev-save-msg');
-    btn.disabled = true;
-    const body = new URLSearchParams({
-        _token: '{{ csrf_token() }}',
-        selLogo: document.getElementById('bev_selLogo').value,
-    });
-    ['eBedrijf','eAdres','ePostcode','ePlaats','eLand','eEmail','eTel','eWebsite','eKvk','eBtw','eIban','dIntro']
-        .forEach(k => body.append(k, document.getElementById('bev_'+k)?.value || ''));
-    try {
-        const r = await fetch('{{ route("admin.settings.bev_defaults") }}', {
-            method:'POST', body, headers:{'X-Requested-With':'XMLHttpRequest'}
-        });
-        const j = await r.json();
-        msg.style.display = '';
-        msg.textContent = j.success ? '✓ Opgeslagen!' : '✗ Fout bij opslaan';
-        msg.style.color = j.success ? '#16a34a' : '#dc2626';
-        setTimeout(() => msg.style.display = 'none', 3000);
-    } catch(e) {
-        msg.style.display = ''; msg.style.color='#dc2626'; msg.textContent='✗ Verbindingsfout';
-    }
-    btn.disabled = false;
-}
-
-// Init bevestiging tab data on page load
-document.addEventListener('DOMContentLoaded', () => { renderBevLogos(); loadBevDefaults(); });
 
 // ── Export/Import helpers ────────────────────────────────
 function selectAll(name)   { document.querySelectorAll('input[name="'+name+'[]"]').forEach(c=>c.checked=true); }

@@ -52,8 +52,8 @@ class brandingController extends Controller
         }
 
         // Kleuren opslaan (hover automatisch 20% donkerder)
-        $primary = $request->input('primary_color', $settings['colors']['primary']);
-        $accent  = $request->input('accent_color',  $settings['colors']['accent']);
+        $primary = $request->input('primary_color', $settings['colors']['primary'] ?? config('branding.colors.primary'));
+        $accent  = $request->input('accent_color',  $settings['colors']['accent']  ?? config('branding.colors.accent'));
 
         $settings['colors']['primary']       = $primary;
         $settings['colors']['primary_hover'] = $this->darkenColor($primary);
@@ -109,7 +109,7 @@ class brandingController extends Controller
 
         // Template
         $template = $request->input('template', 'modern');
-        if (!in_array($template, ['modern', 'minimal', 'warm', 'corporate', 'dark', 'retro', 'helder'])) {
+        if (!in_array($template, ['modern', 'minimal', 'warm', 'corporate', 'dark', 'retro', 'helder', 'snel'])) {
             $template = 'modern';
         }
         $settings['template'] = $template;
