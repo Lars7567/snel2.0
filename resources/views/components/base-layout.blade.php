@@ -134,7 +134,7 @@
 
         /* ── Hoofdheader ─────────────────────────────────── */
         .site-header {
-            background: #f5f0e8;
+            background: var(--color-header-bg);
             width: 100%;
             position: sticky;
             top: 0;
@@ -333,7 +333,7 @@
 
         /* Zoekbalk */
         .site-header__searchbar {
-            background: #f5f0e8;
+            background: var(--color-header-bg);
             padding: 10px 32px 14px;
             display: flex;
             justify-content: center;
@@ -412,7 +412,7 @@
                 top: 135px;
                 left: 0;
                 right: 0;
-                background: #f5f0e8;
+                background: var(--color-header-bg);
                 flex-direction: column;
                 align-items: stretch;
                 gap: 0;

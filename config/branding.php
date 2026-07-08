@@ -29,10 +29,10 @@ return [
         'primary_hover' => '#956e06',
         'accent'        => '#b8930a',
         'accent_hover'  => '#956e06',
-        'header_bg'     => '#2d3142',
-        'header_text'   => '#ffffff',
-        'footer_bg'     => '#2d3142',
-        'cta_bg'        => '#2d3142',
+        'header_bg'     => '#f5f0e8',
+        'header_text'   => '#1a1a1a',
+        'footer_bg'     => '#f5f0e8',
+        'cta_bg'        => '#1a1a1a',
         'cta_btn_bg'    => '#b8930a',
         'cta_btn_text'  => '#ffffff',
     ],
@@ -49,6 +49,6 @@ return [
         'google' => 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap',
     ],
 
-    'template' => 'modern',
+    'template' => 'snel',
 
 ];
