@@ -11,6 +11,8 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             line-height: 1.6;
+            background: var(--color-body-bg);
+            color: var(--color-body-text);
         }
 
         /* Landings pagina */
@@ -33,7 +35,7 @@
             width: 50%;
             max-width: 700px;
             height: 55px;
-            background-color: #ffffff;
+            background-color: var(--color-card-bg, #ffffff);
             display: flex;
             border-radius: 2px;
             overflow: hidden;
@@ -88,7 +90,7 @@
             flex: 0 0 calc(33.333% - 20px);
             padding: 0;
             box-sizing: border-box;
-            background-color: #ffffff;
+            background-color: var(--color-card-bg, #ffffff);
             border-radius: 2px;
             overflow: hidden;
             border: 1px solid #e8e3d8;
@@ -801,7 +803,7 @@
             width: 100%;
             text-align: left;
             padding: 16px 20px;
-            background-color: #ffffff;
+            background-color: var(--color-card-bg, #ffffff);
             border: none;
             outline: none;
             cursor: pointer;
@@ -832,7 +834,7 @@
             overflow: hidden;
             transition: max-height 0.3s ease;
             padding: 0 20px;
-            background-color: #fff;
+            background-color: var(--color-card-bg, #ffffff);
         }
 
         .accordion-content p {
