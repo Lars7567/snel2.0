@@ -180,7 +180,7 @@
     padding: 13px; border-radius: 10px; margin-top: 20px;
     transition: background 0.18s; letter-spacing: 0.02em;
 }
-.dp-bel:hover { background: var(--color-primary-hover, #333); }
+.dp-bel:hover { background: var(--color-muted, #333); }
 
 .dp-socials-kaart {
     background: var(--color-card-bg, #fff);
