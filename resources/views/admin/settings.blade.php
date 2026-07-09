@@ -290,8 +290,9 @@
                     ['hero_bg',       'Hero achtergrond',     $settings['colors']['hero_bg']     ?? '#1a1a1a', 'hero_bg_hex'],
                     ['hero_text',     'Hero titel',           $settings['colors']['hero_text']   ?? '#ffffff', 'hero_text_hex'],
                     ['hero_sub',      'Hero subtitel',        $settings['colors']['hero_sub']    ?? '#9ca3af', 'hero_sub_hex'],
-                    ['topbar_bg',     'Topbalk achtergrond',  $settings['colors']['topbar_bg']   ?? '#0f0f0f', 'topbar_bg_hex'],
-                    ['topbar_text',   'Topbalk tekst',        $settings['colors']['topbar_text'] ?? '#ffffff', 'topbar_text_hex'],
+                    ['topbar_bg',     'Topbalk achtergrond',  $settings['colors']['topbar_bg']    ?? '#0f0f0f', 'topbar_bg_hex'],
+                    ['topbar_text',   'Topbalk tekst',        $settings['colors']['topbar_text']  ?? '#ffffff', 'topbar_text_hex'],
+                    ['header_hover',  'Header hover',         $settings['colors']['header_hover'] ?? '#b8930a', 'header_hover_hex'],
                 ] as [$name, $clabel, $val, $hexId])
                 <div class="db-color-item">
                     <span class="db-color-label">{{ $clabel }}</span>

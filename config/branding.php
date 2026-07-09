@@ -44,6 +44,7 @@ return [
         'hero_sub'      => '#9ca3af',
         'topbar_bg'     => '#0f0f0f',
         'topbar_text'   => '#ffffff',
+        'header_hover'  => '#b8930a',
     ],
 
     /*

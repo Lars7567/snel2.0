@@ -32,6 +32,7 @@
         $bHeroSub      = $bs['colors']['hero_sub']        ?? config('branding.colors.hero_sub');
         $bTopbarBg     = $bs['colors']['topbar_bg']       ?? config('branding.colors.topbar_bg');
         $bTopbarText   = $bs['colors']['topbar_text']     ?? config('branding.colors.topbar_text');
+        $bHeaderHover  = $bs['colors']['header_hover']    ?? config('branding.colors.header_hover');
         $bFontFamily   = $bs['fonts']['family']           ?? config('branding.fonts.family');
         $bFontGoogle   = $bs['fonts']['google']           ?? config('branding.fonts.google');
         $bFooterFacebook  = $bs['footer_facebook']  ?? '';
@@ -96,6 +97,7 @@
             --color-hero-sub:      {{ $bHeroSub }};
             --color-topbar-bg:     {{ $bTopbarBg }};
             --color-topbar-text:   {{ $bTopbarText }};
+            --color-header-hover:  {{ $bHeaderHover }};
             --font-family:         {{ $bFontFamily }};
             --header-image:        url('{{ $bHeaderImage }}');
         }
@@ -208,7 +210,7 @@
             transform: scaleX(0);
             transition: transform 0.22s cubic-bezier(.4,0,.2,1);
         }
-        .site-header__nav > a:hover { color: var(--color-accent, #6366f1); }
+        .site-header__nav > a:hover { color: var(--color-header-hover, var(--color-accent, #6366f1)); }
         .site-header__nav > a:hover::after { transform: scaleX(1); }
 
         /* Admin nav links */
