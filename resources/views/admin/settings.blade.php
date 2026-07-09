@@ -233,7 +233,7 @@
             </div>
             <div class="db-field">
                 <label class="db-label">Footer ondertekst <span class="db-hint">(volledige tekst, bijv. "© 2026 Mijn Bedrijf. Alle rechten voorbehouden.")</span></label>
-                <input type="text" name="footer_bottom_text" class="db-input" value="{{ $settings['footer_bottom_text'] ?? '' }}" placeholder="© {{ date('Y') }} {{ $settings['site_name'] ?? '' }}. All rights reserved.">
+                <input type="text" name="footer_bottom_text" class="db-input" value="{{ $settings['footer_bottom_text'] ?? '' }}" placeholder="© 2026 Mijn Bedrijf. Alle rechten voorbehouden.">
             </div>
             <div class="db-field">
                 <label class="db-label">Favicon <span class="db-hint">(png/ico, 32×32px)</span></label>
