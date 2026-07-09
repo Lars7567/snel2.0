@@ -34,6 +34,8 @@
         $bTopbarText   = $bs['colors']['topbar_text']     ?? config('branding.colors.topbar_text');
         $bHeaderHover  = $bs['colors']['header_hover']    ?? config('branding.colors.header_hover');
         $bMuted        = $bs['colors']['muted']           ?? config('branding.colors.muted');
+        $bBorder       = $bs['colors']['border']          ?? config('branding.colors.border');
+        $bContentText  = $bs['colors']['content_text']    ?? config('branding.colors.content_text');
         $bFontFamily   = $bs['fonts']['family']           ?? config('branding.fonts.family');
         $bFontGoogle   = $bs['fonts']['google']           ?? config('branding.fonts.google');
         $bFooterFacebook  = $bs['footer_facebook']  ?? '';
@@ -100,6 +102,8 @@
             --color-topbar-text:   {{ $bTopbarText }};
             --color-header-hover:  {{ $bHeaderHover }};
             --color-muted:         {{ $bMuted }};
+            --color-border:        {{ $bBorder }};
+            --color-content-text:  {{ $bContentText }};
             --font-family:         {{ $bFontFamily }};
             --header-image:        url('{{ $bHeaderImage }}');
         }

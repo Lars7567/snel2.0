@@ -46,6 +46,8 @@ return [
         'topbar_text'   => '#ffffff',
         'header_hover'  => '#b8930a',
         'muted'         => '#b0a898',
+        'border'        => '#e8e2d8',
+        'content_text'  => '#374151',
     ],
 
     /*

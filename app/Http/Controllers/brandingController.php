@@ -77,6 +77,8 @@ class brandingController extends Controller
         $settings['colors']['topbar_text']  = $request->input('topbar_text',  $settings['colors']['topbar_text']  ?? config('branding.colors.topbar_text'));
         $settings['colors']['header_hover'] = $request->input('header_hover', $settings['colors']['header_hover'] ?? config('branding.colors.header_hover'));
         $settings['colors']['muted']        = $request->input('muted',        $settings['colors']['muted']        ?? config('branding.colors.muted'));
+        $settings['colors']['border']       = $request->input('border',       $settings['colors']['border']       ?? config('branding.colors.border'));
+        $settings['colors']['content_text'] = $request->input('content_text', $settings['colors']['content_text'] ?? config('branding.colors.content_text'));
 
         // Font opslaan
         $fontKey = $request->input('font_family', 'Arial');

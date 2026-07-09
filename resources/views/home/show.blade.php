@@ -8,7 +8,7 @@
 /* ── Hero ─────────────────────────────────────────────── */
 .dp-hero {
     background: var(--color-header-bg, #f5f0e8);
-    border-bottom: 1px solid #e8e2d8;
+    border-bottom: 1px solid var(--color-border, #e8e2d8);
     padding: 40px 32px 36px;
 }
 .dp-hero__inner {
@@ -84,7 +84,7 @@
     border-radius: 14px;
     overflow: hidden;
     background: var(--color-header-bg, #ede8de);
-    border: 1px solid #e2ddd5;
+    border: 1px solid var(--color-border, #e2ddd5);
 }
 .dp-afbeelding img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .dp-afbeelding__leeg {
@@ -95,7 +95,7 @@
 
 .dp-over {
     background: var(--color-card-bg, #fff);
-    border: 1px solid #e8e2d8;
+    border: 1px solid var(--color-border, #e8e2d8);
     border-radius: 14px;
     padding: 28px 30px;
 }
@@ -106,7 +106,7 @@
     line-height: 1.65;
     margin: 0 0 18px;
     padding-bottom: 18px;
-    border-bottom: 1px solid #f0ece5;
+    border-bottom: 1px solid var(--color-border, #f0ece5);
     font-style: italic;
 }
 .dp-over__titel {
@@ -118,10 +118,11 @@
 }
 .dp-over__tekst {
     font-size: 14px;
-    color: var(--color-muted, #6b7280);
+    color: var(--color-content-text, #374151);
     line-height: 1.8;
     margin: 0;
 }
+.dp-over__tekst a { color: var(--color-primary, #b8930a); }
 .dp-over__leeg { font-size: 14px; color: var(--color-muted, #c4bdb3); font-style: italic; margin: 0; }
 
 .dp-cats { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -132,7 +133,7 @@
     font-weight: 700;
     padding: 5px 13px;
     border-radius: 50px;
-    border: 1px solid #e8dfd0;
+    border: 1px solid var(--color-border, #e8dfd0);
 }
 
 /* ── Sidebar ──────────────────────────────────────────── */
@@ -140,7 +141,7 @@
 
 .dp-kaart {
     background: var(--color-card-bg, #fff);
-    border: 1px solid #e8e2d8;
+    border: 1px solid var(--color-border, #e8e2d8);
     border-radius: 14px;
     padding: 24px;
 }
@@ -183,7 +184,7 @@
 
 .dp-socials-kaart {
     background: var(--color-card-bg, #fff);
-    border: 1px solid #e8e2d8;
+    border: 1px solid var(--color-border, #e8e2d8);
     border-radius: 14px;
     padding: 20px 24px;
 }
@@ -195,7 +196,7 @@
 .dp-socials { display: flex; gap: 8px; flex-wrap: wrap; }
 .dp-socials a {
     width: 36px; height: 36px; border-radius: 9px;
-    background: var(--color-header-bg, #f5f0e8); border: 1px solid #e2dbd0;
+    background: var(--color-header-bg, #f5f0e8); border: 1px solid var(--color-border, #e2dbd0);
     display: grid; place-items: center;
     color: var(--color-muted, #b8a898); text-decoration: none;
     transition: background 0.15s, color 0.15s;

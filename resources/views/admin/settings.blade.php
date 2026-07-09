@@ -294,6 +294,8 @@
                     ['topbar_text',   'Topbalk tekst',        $settings['colors']['topbar_text']  ?? '#ffffff', 'topbar_text_hex'],
                     ['header_hover',  'Header hover',         $settings['colors']['header_hover'] ?? '#b8930a', 'header_hover_hex'],
                     ['muted',         'Subtiele tekst',       $settings['colors']['muted']        ?? '#b0a898', 'muted_hex'],
+                    ['border',        'Rand kleur',           $settings['colors']['border']       ?? '#e8e2d8', 'border_hex'],
+                    ['content_text',  'Inhoud tekst',         $settings['colors']['content_text'] ?? '#374151', 'content_text_hex'],
                 ] as [$name, $clabel, $val, $hexId])
                 <div class="db-color-item">
                     <span class="db-color-label">{{ $clabel }}</span>
