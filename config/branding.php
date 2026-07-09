@@ -42,6 +42,8 @@ return [
         'hero_bg'       => '#1a1a1a',
         'hero_text'     => '#ffffff',
         'hero_sub'      => '#9ca3af',
+        'topbar_bg'     => '#0f0f0f',
+        'topbar_text'   => '#ffffff',
     ],
 
     /*

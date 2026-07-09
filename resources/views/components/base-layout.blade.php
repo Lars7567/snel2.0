@@ -30,6 +30,8 @@
         $bHeroBg       = $bs['colors']['hero_bg']         ?? config('branding.colors.hero_bg');
         $bHeroText     = $bs['colors']['hero_text']       ?? config('branding.colors.hero_text');
         $bHeroSub      = $bs['colors']['hero_sub']        ?? config('branding.colors.hero_sub');
+        $bTopbarBg     = $bs['colors']['topbar_bg']       ?? config('branding.colors.topbar_bg');
+        $bTopbarText   = $bs['colors']['topbar_text']     ?? config('branding.colors.topbar_text');
         $bFontFamily   = $bs['fonts']['family']           ?? config('branding.fonts.family');
         $bFontGoogle   = $bs['fonts']['google']           ?? config('branding.fonts.google');
         $bFooterFacebook  = $bs['footer_facebook']  ?? '';
@@ -92,6 +94,8 @@
             --color-hero-bg:       {{ $bHeroBg }};
             --color-hero-text:     {{ $bHeroText }};
             --color-hero-sub:      {{ $bHeroSub }};
+            --color-topbar-bg:     {{ $bTopbarBg }};
+            --color-topbar-text:   {{ $bTopbarText }};
             --font-family:         {{ $bFontFamily }};
             --header-image:        url('{{ $bHeaderImage }}');
         }
@@ -103,8 +107,8 @@
 
         /* ── Topbalk ─────────────────────────────────────── */
         .topbar {
-            background: #0f0f0f;
-            color: #9ca3af;
+            background: var(--color-topbar-bg, #0f0f0f);
+            color: var(--color-topbar-text, #9ca3af);
             font-size: 11.5px;
             font-weight: 500;
             letter-spacing: 0.03em;
@@ -123,7 +127,7 @@
         }
         .topbar__inner a,
         .topbar__inner span {
-            color: #fff;
+            color: var(--color-topbar-text, #fff);
             text-decoration: none;
             display: flex;
             align-items: center;
