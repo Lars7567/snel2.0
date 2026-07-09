@@ -43,7 +43,7 @@
 
 .ao-blok {
     background: var(--color-card-bg, #f9f7f3);
-    border: 1px solid var(--color-border, #ece9e3);
+    border: 1px solid var(--color-muted, #ece9e3);
     border-radius: 20px;
     padding: 36px 32px;
 }
