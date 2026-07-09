@@ -315,8 +315,8 @@
             transition: background 0.12s, color 0.12s;
         }
         .site-header__dropdown-menu a:hover {
-            background: #f5f3ff;
-            color: var(--color-accent, #6366f1) !important;
+            background: rgba(0,0,0,0.04);
+            color: var(--color-header-hover, var(--color-accent, #6366f1)) !important;
         }
         .site-header__dropdown.open .site-header__dropdown-menu,
         .site-header__dropdown:hover .site-header__dropdown-menu { display: block; }
