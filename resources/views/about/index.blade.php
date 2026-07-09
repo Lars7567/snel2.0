@@ -61,7 +61,7 @@
     margin: 0 0 12px;
 }
 .ao-blok__tekst {
-    font-size: 14px; color: var(--color-content-text, #6b7280);
+    font-size: 14px; color: var(--color-muted, #6b7280);
     line-height: 1.75; margin: 0;
 }
 
