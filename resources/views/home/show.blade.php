@@ -128,12 +128,12 @@
 .dp-cats { display: flex; flex-wrap: wrap; gap: 8px; }
 .dp-cats__tag {
     background: var(--color-header-bg, #f5f0e8);
-    color: var(--color-primary, #8b7355);
+    color: var(--color-muted, #8b7355);
     font-size: 12px;
     font-weight: 700;
     padding: 5px 13px;
     border-radius: 50px;
-    border: 1px solid var(--color-border, #e8dfd0);
+    border: 1px solid var(--color-muted, #e8dfd0);
 }
 
 /* ── Sidebar ──────────────────────────────────────────── */
@@ -196,7 +196,7 @@
 .dp-socials { display: flex; gap: 8px; flex-wrap: wrap; }
 .dp-socials a {
     width: 36px; height: 36px; border-radius: 9px;
-    background: var(--color-header-bg, #f5f0e8); border: 1px solid var(--color-border, #e2dbd0);
+    background: var(--color-header-bg, #f5f0e8); border: 1px solid var(--color-muted, #e2dbd0);
     display: grid; place-items: center;
     color: var(--color-muted, #b8a898); text-decoration: none;
     transition: background 0.15s, color 0.15s;

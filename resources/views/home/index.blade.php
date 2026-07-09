@@ -86,8 +86,8 @@
 
 /* Kaart */
 .bdr-kaart {
-    background: #fff;
-    border: 1px solid #ece9e3;
+    background: var(--color-card-bg, #fff);
+    border: 1px solid var(--color-border, #ece9e3);
     border-radius: 16px;
     overflow: hidden;
     text-decoration: none;
@@ -105,12 +105,14 @@
     overflow: hidden;
     background: var(--color-header-bg, #f5f0e8);
     flex-shrink: 0;
+    border-radius: 0; margin: 0;
 }
 .bdr-kaart__img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.35s;
+    display: block;
 }
 .bdr-kaart:hover .bdr-kaart__img img { transform: scale(1.05); }
 .bdr-kaart__img-leeg {
@@ -133,7 +135,7 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 16px;
     font-weight: 800;
-    color: #0f0f0f;
+    color: var(--color-body-text, #0f0f0f);
     margin: 0;
     letter-spacing: -0.01em;
 }
@@ -151,7 +153,7 @@
 .bdr-kaart__desc {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 13.5px;
-    color: #6b7280;
+    color: var(--color-muted, #6b7280);
     line-height: 1.6;
     margin: 0;
     flex: 1;
@@ -163,7 +165,7 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 12.5px;
     font-weight: 700;
-    color: #0f0f0f;
+    color: var(--color-body-text, #0f0f0f);
     margin-top: 8px;
     letter-spacing: 0.02em;
 }
