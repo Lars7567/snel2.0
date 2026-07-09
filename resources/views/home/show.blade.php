@@ -7,8 +7,8 @@
 
 /* ── Hero ─────────────────────────────────────────────── */
 .dp-hero {
-    background: var(--color-header-bg, #f5f0e8);
-    border-bottom: 1px solid var(--color-border, #e8e2d8);
+    background: var(--color-hero-bg, #1a1a1a);
+    border-bottom: none;
     padding: 40px 32px 36px;
 }
 .dp-hero__inner {
@@ -19,18 +19,18 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--color-muted, #b0a898);
+    color: var(--color-hero-sub, #b0a898);
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
     margin-bottom: 22px;
     transition: color 0.15s;
 }
-.dp-terug:hover { color: var(--color-body-text, #0f0f0f); }
+.dp-terug:hover { color: var(--color-hero-text, #fff); }
 .dp-hero__label {
     display: inline-block;
-    background: var(--color-header-bg, #ede8de);
-    color: var(--color-muted, #8b7355);
+    background: rgba(255,255,255,0.08);
+    color: var(--color-hero-sub, #c8bfb0);
     font-size: 10.5px;
     font-weight: 800;
     letter-spacing: 0.14em;
@@ -42,7 +42,7 @@
 .dp-hero__naam {
     font-size: 38px;
     font-weight: 900;
-    color: var(--color-body-text, #1a1a1a);
+    color: var(--color-hero-text, #fff);
     margin: 0 0 12px;
     letter-spacing: -0.03em;
     line-height: 1.1;
@@ -58,10 +58,10 @@
     align-items: center;
     gap: 6px;
     font-size: 13.5px;
-    color: var(--color-muted, #9e8e7a);
+    color: var(--color-hero-sub, #9e8e7a);
     font-weight: 500;
 }
-.dp-hero__meta i { font-size: 11px; color: var(--color-muted, #b8a888); }
+.dp-hero__meta i { font-size: 11px; color: var(--color-hero-sub, #b8a888); }
 
 /* ── Body ─────────────────────────────────────────────── */
 .dp-body { padding: 40px 32px 80px; }
