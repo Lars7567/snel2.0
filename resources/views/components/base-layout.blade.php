@@ -381,8 +381,8 @@
             display: flex;
             align-items: center;
             gap: 0;
-            background: #ede8de;
-            border: 1.5px solid #d8d0c2;
+            background: color-mix(in srgb, var(--color-muted, #b0a898) 50%, transparent);
+            border: 1.5px solid color-mix(in srgb, var(--color-muted, #d8d0c2) 50%, transparent);
             border-radius: 50px;
             padding: 0 6px 0 20px;
             transition: border-color 0.2s, box-shadow 0.2s;
