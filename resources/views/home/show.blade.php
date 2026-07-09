@@ -167,7 +167,7 @@
     background: var(--color-header-bg, #f5f0e8);
     border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
-    color: var(--color-primary, #8b7355); font-size: 12px; flex-shrink: 0;
+    color: var(--color-muted, #8b7355); font-size: 12px; flex-shrink: 0;
 }
 .dp-kaart__lijst a { color: var(--color-body-text, #374151); text-decoration: none; font-weight: 500; transition: color 0.15s; word-break: break-all; }
 .dp-kaart__lijst a:hover { color: var(--color-primary, #1a1a1a); }
