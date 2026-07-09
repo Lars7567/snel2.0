@@ -88,7 +88,7 @@
 
 .ao-verhaal__label {
     display: inline-block;
-    background: var(--color-header-bg, #ede8de); color: var(--color-muted, #8b7355);
+    background: color-mix(in srgb, var(--color-muted, #8b7355) 20%, transparent); color: var(--color-muted, #8b7355);
     font-size: 11px; font-weight: 800;
     letter-spacing: 0.14em; text-transform: uppercase;
     padding: 5px 14px; border-radius: 50px;
