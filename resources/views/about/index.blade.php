@@ -57,7 +57,7 @@
 }
 .ao-blok__titel {
     font-size: 20px; font-weight: 800;
-    color: var(--color-body-text, #1a1a1a); letter-spacing: -0.02em;
+    color: var(--color-muted, #1a1a1a); letter-spacing: -0.02em;
     margin: 0 0 12px;
 }
 .ao-blok__tekst {
