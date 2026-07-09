@@ -122,13 +122,13 @@
 }
 .ao-cta__btn {
     display: inline-flex; align-items: center; gap: 8px;
-    background: var(--color-primary, #1a1a1a); color: #fff;
+    background: var(--color-muted, #1a1a1a); color: #fff;
     text-decoration: none; font-size: 14px; font-weight: 700;
     padding: 14px 32px; border-radius: 50px;
     letter-spacing: 0.03em;
     transition: background 0.18s, transform 0.18s;
 }
-.ao-cta__btn:hover { background: var(--color-muted, #333); transform: translateY(-2px); }
+.ao-cta__btn:hover { background: var(--color-header-text, #1a1a1a); transform: translateY(-2px); }
 </style>
 
 {{-- Hero --}}
