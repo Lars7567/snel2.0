@@ -8,8 +8,9 @@ return [
     |--------------------------------------------------------------------------
     | Pad naar het logo-bestand in de public map.
     */
-    'site_name'    => 'Snel Op Zoek',
-    'site_desc'    => 'Vind snel het juiste bedrijf bij u in de buurt.',
+    'site_name'         => 'Snel Op Zoek',
+    'site_desc'         => 'Vind snel het juiste bedrijf bij u in de buurt.',
+    'footer_bottom_text' => 'All rights reserved.',
     'favicon'      => '/images/favicon.png',
     'logo'         => '/images/placeholder-logo.svg',
     'footer_logo'  => '/images/placeholder-logo.svg',

@@ -232,6 +232,10 @@
                 <input type="text" name="site_desc" class="db-input" value="{{ $settings['site_desc'] ?? '' }}">
             </div>
             <div class="db-field">
+                <label class="db-label">Footer ondertekst <span class="db-hint">(tekst na "© 2026 Sitenaam.")</span></label>
+                <input type="text" name="footer_bottom_text" class="db-input" value="{{ $settings['footer_bottom_text'] ?? 'All rights reserved.' }}">
+            </div>
+            <div class="db-field">
                 <label class="db-label">Favicon <span class="db-hint">(png/ico, 32×32px)</span></label>
                 @php $fav = $settings['favicon'] ?? ''; @endphp
                 @if($fav && file_exists(public_path(ltrim($fav,'/'))))

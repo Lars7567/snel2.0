@@ -37,8 +37,9 @@ class brandingController extends Controller
         $settings = $this->loadSettings();
 
         // Algemeen
-        $settings['site_name'] = $request->input('site_name', $settings['site_name'] ?? config('branding.site_name'));
-        $settings['site_desc'] = $request->input('site_desc', $settings['site_desc'] ?? config('branding.site_desc'));
+        $settings['site_name']          = $request->input('site_name',          $settings['site_name']          ?? config('branding.site_name'));
+        $settings['site_desc']          = $request->input('site_desc',          $settings['site_desc']          ?? config('branding.site_desc'));
+        $settings['footer_bottom_text'] = $request->input('footer_bottom_text', $settings['footer_bottom_text'] ?? config('branding.footer_bottom_text'));
 
         // Favicon uploaden
         if ($request->hasFile('favicon')) {

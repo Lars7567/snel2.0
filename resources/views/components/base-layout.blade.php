@@ -6,7 +6,8 @@
     @php
         $brandingFile = storage_path('app/branding.json');
         $bs = file_exists($brandingFile) ? (json_decode(file_get_contents($brandingFile), true) ?? []) : [];
-        $bSiteName     = $bs['site_name']                  ?? config('branding.site_name');
+        $bSiteName          = $bs['site_name']             ?? config('branding.site_name');
+        $bFooterBottomText  = $bs['footer_bottom_text']   ?? config('branding.footer_bottom_text');
         $bSiteDesc     = $bs['site_desc']                 ?? config('branding.site_desc');
         $bFavicon      = $bs['favicon']                   ?? config('branding.favicon');
         $bLogo         = $bs['logo']                      ?? config('branding.logo');
@@ -639,7 +640,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <span>© {{ date('Y') }} {{ $bSiteName }}. All rights reserved.</span>
+        <span>© {{ date('Y') }} {{ $bSiteName }}. {{ $bFooterBottomText }}</span>
     </div>
 </footer>
 
