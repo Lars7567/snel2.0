@@ -45,6 +45,7 @@ return [
         'topbar_bg'     => '#0f0f0f',
         'topbar_text'   => '#ffffff',
         'header_hover'  => '#b8930a',
+        'muted'         => '#b0a898',
     ],
 
     /*

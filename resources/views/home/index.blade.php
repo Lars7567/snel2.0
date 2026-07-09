@@ -140,7 +140,7 @@
 .bdr-kaart__plaats {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 12.5px;
-    color: #b0a898;
+    color: var(--color-muted, #b0a898);
     font-weight: 500;
     margin: 0;
     display: flex;

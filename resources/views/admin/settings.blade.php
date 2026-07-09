@@ -293,6 +293,7 @@
                     ['topbar_bg',     'Topbalk achtergrond',  $settings['colors']['topbar_bg']    ?? '#0f0f0f', 'topbar_bg_hex'],
                     ['topbar_text',   'Topbalk tekst',        $settings['colors']['topbar_text']  ?? '#ffffff', 'topbar_text_hex'],
                     ['header_hover',  'Header hover',         $settings['colors']['header_hover'] ?? '#b8930a', 'header_hover_hex'],
+                    ['muted',         'Subtiele tekst',       $settings['colors']['muted']        ?? '#b0a898', 'muted_hex'],
                 ] as [$name, $clabel, $val, $hexId])
                 <div class="db-color-item">
                     <span class="db-color-label">{{ $clabel }}</span>
