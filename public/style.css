@@ -490,7 +490,7 @@
         /* Footer */
         footer {
             background: var(--color-footer-bg);
-            color: #4b3f2f;
+            color: var(--color-footer-text, #4b3f2f);
             padding: 56px 0 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             width: 100%;
@@ -520,13 +520,14 @@
 
         footer .footer-col--logo p {
             font-size: 13px;
-            color: #9e8e7a;
+            color: var(--color-footer-text, #9e8e7a);
             line-height: 1.65;
             margin: 12px 0 0;
+            opacity: 0.8;
         }
 
         footer h4 {
-            color: #1a1a1a;
+            color: var(--color-footer-text, #1a1a1a);
             font-size: 11px;
             font-weight: 800;
             letter-spacing: 0.12em;
@@ -545,14 +546,14 @@
 
         footer a {
             text-decoration: none;
-            color: #8b7355;
+            color: var(--color-footer-text, #8b7355);
             font-size: 13.5px;
             font-weight: 500;
             transition: color 0.18s;
             display: inline-block;
         }
 
-        footer a:hover { color: #1a1a1a; }
+        footer a:hover { color: var(--color-footer-text, #1a1a1a); opacity: 0.7; }
 
         .footer-socials {
             display: flex;

@@ -66,9 +66,13 @@ class brandingController extends Controller
         $settings['colors']['cta_text']      = $request->input('cta_text',     $settings['colors']['cta_text']     ?? '#ffffff');
         $settings['colors']['cta_btn_bg']    = $request->input('cta_btn_bg',   $settings['colors']['cta_btn_bg']   ?? config('branding.colors.cta_btn_bg'));
         $settings['colors']['cta_btn_text']  = $request->input('cta_btn_text', $settings['colors']['cta_btn_text'] ?? config('branding.colors.cta_btn_text'));
-        $settings['colors']['body_bg']       = $request->input('body_bg',      $settings['colors']['body_bg']      ?? config('branding.colors.body_bg'));
-        $settings['colors']['body_text']     = $request->input('body_text',    $settings['colors']['body_text']    ?? config('branding.colors.body_text'));
-        $settings['colors']['card_bg']       = $request->input('card_bg',      $settings['colors']['card_bg']      ?? config('branding.colors.card_bg'));
+        $settings['colors']['body_bg']      = $request->input('body_bg',      $settings['colors']['body_bg']      ?? config('branding.colors.body_bg'));
+        $settings['colors']['body_text']    = $request->input('body_text',    $settings['colors']['body_text']    ?? config('branding.colors.body_text'));
+        $settings['colors']['card_bg']      = $request->input('card_bg',      $settings['colors']['card_bg']      ?? config('branding.colors.card_bg'));
+        $settings['colors']['footer_text']  = $request->input('footer_text',  $settings['colors']['footer_text']  ?? config('branding.colors.footer_text'));
+        $settings['colors']['hero_bg']      = $request->input('hero_bg',      $settings['colors']['hero_bg']      ?? config('branding.colors.hero_bg'));
+        $settings['colors']['hero_text']    = $request->input('hero_text',    $settings['colors']['hero_text']    ?? config('branding.colors.hero_text'));
+        $settings['colors']['hero_sub']     = $request->input('hero_sub',     $settings['colors']['hero_sub']     ?? config('branding.colors.hero_sub'));
 
         // Font opslaan
         $fontKey = $request->input('font_family', 'Arial');

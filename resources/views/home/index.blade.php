@@ -40,13 +40,13 @@
 <style>
 /* Hero */
 .bdr-hero {
-    background: #1a1a1a;
+    background: var(--color-hero-bg, #1a1a1a);
     padding: 48px 32px;
     text-align: center;
 }
 .bdr-hero__label {
     display: inline-block;
-    background: rgba(255,255,255,0.08); color: #c8bfb0;
+    background: rgba(255,255,255,0.08); color: var(--color-hero-sub, #c8bfb0);
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 11px; font-weight: 800;
     letter-spacing: 0.16em; text-transform: uppercase;
@@ -55,12 +55,12 @@
 .bdr-hero__titel {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 44px; font-weight: 900;
-    color: #fff; letter-spacing: -0.04em;
+    color: var(--color-hero-text, #fff); letter-spacing: -0.04em;
     line-height: 1.1; margin: 0 0 16px;
 }
 .bdr-hero__sub {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 16px; color: #9ca3af;
+    font-size: 16px; color: var(--color-hero-sub, #9ca3af);
     font-weight: 400; line-height: 1.7;
     max-width: 480px; margin: 0 auto;
 }

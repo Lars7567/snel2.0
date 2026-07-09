@@ -38,6 +38,10 @@ return [
         'body_bg'       => '#ffffff',
         'body_text'     => '#1a1a1a',
         'card_bg'       => '#ffffff',
+        'footer_text'   => '#8b7355',
+        'hero_bg'       => '#1a1a1a',
+        'hero_text'     => '#ffffff',
+        'hero_sub'      => '#9ca3af',
     ],
 
     /*

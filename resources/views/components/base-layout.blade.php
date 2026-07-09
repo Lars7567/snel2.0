@@ -26,6 +26,10 @@
         $bBodyBg       = $bs['colors']['body_bg']         ?? config('branding.colors.body_bg');
         $bBodyText     = $bs['colors']['body_text']       ?? config('branding.colors.body_text');
         $bCardBg       = $bs['colors']['card_bg']         ?? config('branding.colors.card_bg');
+        $bFooterText   = $bs['colors']['footer_text']     ?? config('branding.colors.footer_text');
+        $bHeroBg       = $bs['colors']['hero_bg']         ?? config('branding.colors.hero_bg');
+        $bHeroText     = $bs['colors']['hero_text']       ?? config('branding.colors.hero_text');
+        $bHeroSub      = $bs['colors']['hero_sub']        ?? config('branding.colors.hero_sub');
         $bFontFamily   = $bs['fonts']['family']           ?? config('branding.fonts.family');
         $bFontGoogle   = $bs['fonts']['google']           ?? config('branding.fonts.google');
         $bFooterFacebook  = $bs['footer_facebook']  ?? '';
@@ -84,6 +88,10 @@
             --color-body-bg:       {{ $bBodyBg }};
             --color-body-text:     {{ $bBodyText }};
             --color-card-bg:       {{ $bCardBg }};
+            --color-footer-text:   {{ $bFooterText }};
+            --color-hero-bg:       {{ $bHeroBg }};
+            --color-hero-text:     {{ $bHeroText }};
+            --color-hero-sub:      {{ $bHeroSub }};
             --font-family:         {{ $bFontFamily }};
             --header-image:        url('{{ $bHeaderImage }}');
         }
