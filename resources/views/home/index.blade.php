@@ -153,7 +153,7 @@
 .bdr-kaart__desc {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 13.5px;
-    color: var(--color-muted, #6b7280);
+    color: var(--color-content-text, #6b7280);
     line-height: 1.6;
     margin: 0;
     flex: 1;

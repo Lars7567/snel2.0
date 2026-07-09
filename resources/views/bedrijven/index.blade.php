@@ -139,7 +139,7 @@
 .bvn-kaart__plaats i { font-size: 11px; }
 .bvn-kaart__desc {
     font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px;
-    color: var(--color-muted, #6b7280); line-height: 1.6; margin: 0; flex: 1;
+    color: var(--color-content-text, #6b7280); line-height: 1.6; margin: 0; flex: 1;
 }
 .bvn-kaart__cta {
     display: inline-flex; align-items: center; gap: 7px;
