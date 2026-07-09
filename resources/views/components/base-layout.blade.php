@@ -392,7 +392,7 @@
             box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
         }
         .site-header__searchbar-inner i {
-            color: #8b7d6b;
+            color: #1a1a1a;
             font-size: 14px;
             margin-right: 12px;
             flex-shrink: 0;
@@ -410,13 +410,13 @@
             min-width: 0;
         }
         .site-header__searchbar-inner input::placeholder {
-            color: #9e8e7a;
+            color: #1a1a1a;
             font-weight: 400;
         }
         .site-header__searchbar-divider {
             width: 1px;
             height: 22px;
-            background: #c8bfb0;
+            background: #1a1a1a;
             margin: 0 8px;
             flex-shrink: 0;
         }
