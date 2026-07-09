@@ -19,18 +19,18 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: #b0a898;
+    color: var(--color-muted, #b0a898);
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
     margin-bottom: 22px;
     transition: color 0.15s;
 }
-.dp-terug:hover { color: #0f0f0f; }
+.dp-terug:hover { color: var(--color-body-text, #0f0f0f); }
 .dp-hero__label {
     display: inline-block;
-    background: #ede8de;
-    color: #8b7355;
+    background: var(--color-header-bg, #ede8de);
+    color: var(--color-muted, #8b7355);
     font-size: 10.5px;
     font-weight: 800;
     letter-spacing: 0.14em;
@@ -42,7 +42,7 @@
 .dp-hero__naam {
     font-size: 38px;
     font-weight: 900;
-    color: #1a1a1a;
+    color: var(--color-body-text, #1a1a1a);
     margin: 0 0 12px;
     letter-spacing: -0.03em;
     line-height: 1.1;
@@ -58,10 +58,10 @@
     align-items: center;
     gap: 6px;
     font-size: 13.5px;
-    color: #9e8e7a;
+    color: var(--color-muted, #9e8e7a);
     font-weight: 500;
 }
-.dp-hero__meta i { font-size: 11px; color: #b8a888; }
+.dp-hero__meta i { font-size: 11px; color: var(--color-muted, #b8a888); }
 
 /* ── Body ─────────────────────────────────────────────── */
 .dp-body { padding: 40px 32px 80px; }
@@ -83,18 +83,18 @@
     aspect-ratio: 16/9;
     border-radius: 14px;
     overflow: hidden;
-    background: #ede8de;
+    background: var(--color-header-bg, #ede8de);
     border: 1px solid #e2ddd5;
 }
 .dp-afbeelding img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .dp-afbeelding__leeg {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
-    color: #c8bfb0; font-size: 52px;
+    color: var(--color-muted, #c8bfb0); font-size: 52px;
 }
 
 .dp-over {
-    background: #fff;
+    background: var(--color-card-bg, #fff);
     border: 1px solid #e8e2d8;
     border-radius: 14px;
     padding: 28px 30px;
@@ -102,7 +102,7 @@
 .dp-over__kort {
     font-size: 16px;
     font-weight: 600;
-    color: #4b3f2f;
+    color: var(--color-body-text, #4b3f2f);
     line-height: 1.65;
     margin: 0 0 18px;
     padding-bottom: 18px;
@@ -112,22 +112,22 @@
 .dp-over__titel {
     font-size: 15px;
     font-weight: 800;
-    color: #1a1a1a;
+    color: var(--color-body-text, #1a1a1a);
     margin: 0 0 10px;
     letter-spacing: -0.01em;
 }
 .dp-over__tekst {
     font-size: 14px;
-    color: #6b7280;
+    color: var(--color-muted, #6b7280);
     line-height: 1.8;
     margin: 0;
 }
-.dp-over__leeg { font-size: 14px; color: #c4bdb3; font-style: italic; margin: 0; }
+.dp-over__leeg { font-size: 14px; color: var(--color-muted, #c4bdb3); font-style: italic; margin: 0; }
 
 .dp-cats { display: flex; flex-wrap: wrap; gap: 8px; }
 .dp-cats__tag {
     background: var(--color-header-bg, #f5f0e8);
-    color: #8b7355;
+    color: var(--color-primary, #8b7355);
     font-size: 12px;
     font-weight: 700;
     padding: 5px 13px;
@@ -139,7 +139,7 @@
 .dp-sidebar { display: flex; flex-direction: column; gap: 28px; }
 
 .dp-kaart {
-    background: #fff;
+    background: var(--color-card-bg, #fff);
     border: 1px solid #e8e2d8;
     border-radius: 14px;
     padding: 24px;
@@ -149,7 +149,7 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #b0a898;
+    color: var(--color-muted, #b0a898);
     margin: 0 0 18px;
 }
 .dp-kaart__lijst {
@@ -159,30 +159,30 @@
 }
 .dp-kaart__lijst li {
     display: flex; align-items: flex-start; gap: 11px;
-    font-size: 13.5px; color: #374151; line-height: 1.5;
+    font-size: 13.5px; color: var(--color-body-text, #374151); line-height: 1.5;
 }
 .dp-kaart__ico {
     width: 30px; height: 30px;
     background: var(--color-header-bg, #f5f0e8);
     border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
-    color: #8b7355; font-size: 12px; flex-shrink: 0;
+    color: var(--color-primary, #8b7355); font-size: 12px; flex-shrink: 0;
 }
-.dp-kaart__lijst a { color: #374151; text-decoration: none; font-weight: 500; transition: color 0.15s; word-break: break-all; }
-.dp-kaart__lijst a:hover { color: #1a1a1a; }
-.dp-kaart__leeg { font-size: 13px; color: #c4bdb3; font-style: italic; }
+.dp-kaart__lijst a { color: var(--color-body-text, #374151); text-decoration: none; font-weight: 500; transition: color 0.15s; word-break: break-all; }
+.dp-kaart__lijst a:hover { color: var(--color-primary, #1a1a1a); }
+.dp-kaart__leeg { font-size: 13px; color: var(--color-muted, #c4bdb3); font-style: italic; }
 
 .dp-bel {
     display: flex; align-items: center; justify-content: center; gap: 8px;
-    background: #1a1a1a; color: #fff;
+    background: var(--color-primary, #1a1a1a); color: #fff;
     text-decoration: none; font-size: 14px; font-weight: 700;
     padding: 13px; border-radius: 10px; margin-top: 20px;
     transition: background 0.18s; letter-spacing: 0.02em;
 }
-.dp-bel:hover { background: #333; }
+.dp-bel:hover { background: var(--color-primary-hover, #333); }
 
 .dp-socials-kaart {
-    background: #fff;
+    background: var(--color-card-bg, #fff);
     border: 1px solid #e8e2d8;
     border-radius: 14px;
     padding: 20px 24px;
@@ -190,14 +190,14 @@
 .dp-socials-kaart__titel {
     font-size: 11px; font-weight: 800;
     text-transform: uppercase; letter-spacing: 0.1em;
-    color: #b0a898; margin: 0 0 14px;
+    color: var(--color-muted, #b0a898); margin: 0 0 14px;
 }
 .dp-socials { display: flex; gap: 8px; flex-wrap: wrap; }
 .dp-socials a {
     width: 36px; height: 36px; border-radius: 9px;
     background: var(--color-header-bg, #f5f0e8); border: 1px solid #e2dbd0;
     display: grid; place-items: center;
-    color: #b8a898; text-decoration: none;
+    color: var(--color-muted, #b8a898); text-decoration: none;
     transition: background 0.15s, color 0.15s;
 }
 .dp-socials a i {
@@ -207,7 +207,7 @@
     display: block;
     margin: 0; padding: 0;
 }
-.dp-socials a:hover { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+.dp-socials a:hover { background: var(--color-primary, #1a1a1a); color: #fff; border-color: var(--color-primary, #1a1a1a); }
 </style>
 
 <div class="dp">
