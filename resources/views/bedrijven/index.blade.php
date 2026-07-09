@@ -103,7 +103,7 @@
 
 /* Kaart */
 .bvn-kaart {
-    background: var(--color-card-bg, #fff); border: 1px solid var(--color-border, #ece9e3); border-radius: 16px;
+    background: var(--color-card-bg, #fff); border: 1px solid #e2ddd5; border-radius: 16px;
     overflow: hidden; text-decoration: none;
     display: flex; flex-direction: column;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -129,7 +129,7 @@
 }
 .bvn-kaart__naam {
     font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800;
-    color: var(--color-body-text, #0f0f0f); margin: 0; letter-spacing: -0.01em;
+    color: #0f0f0f; margin: 0; letter-spacing: -0.01em;
 }
 .bvn-kaart__plaats {
     font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12.5px;
@@ -144,7 +144,7 @@
 .bvn-kaart__cta {
     display: inline-flex; align-items: center; gap: 7px;
     font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12.5px;
-    font-weight: 700; color: var(--color-body-text, #0f0f0f); margin-top: 8px; letter-spacing: 0.02em;
+    font-weight: 700; color: #0f0f0f; margin-top: 8px; letter-spacing: 0.02em;
 }
 .bvn-kaart__cta i { font-size: 11px; transition: transform 0.2s; }
 .bvn-kaart:hover .bvn-kaart__cta i { transform: translateX(4px); }
