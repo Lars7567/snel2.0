@@ -640,7 +640,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <span>© {{ date('Y') }} {{ $bSiteName }}. {{ $bFooterBottomText }}</span>
+        <span>{{ $bFooterBottomText ?: '© ' . date('Y') . ' ' . $bSiteName . '. All rights reserved.' }}</span>
     </div>
 </footer>
 

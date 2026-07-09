@@ -10,7 +10,7 @@ return [
     */
     'site_name'         => 'Snel Op Zoek',
     'site_desc'         => 'Vind snel het juiste bedrijf bij u in de buurt.',
-    'footer_bottom_text' => 'All rights reserved.',
+    'footer_bottom_text' => '',
     'favicon'      => '/images/favicon.png',
     'logo'         => '/images/placeholder-logo.svg',
     'footer_logo'  => '/images/placeholder-logo.svg',
