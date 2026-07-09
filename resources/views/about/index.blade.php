@@ -96,7 +96,7 @@
 }
 .ao-verhaal__titel {
     font-size: 36px; font-weight: 900;
-    color: var(--color-body-text, #1a1a1a); letter-spacing: -0.03em;
+    color: var(--color-muted, #1a1a1a); letter-spacing: -0.03em;
     line-height: 1.15; margin: 0 0 20px;
 }
 .ao-verhaal__tekst {
