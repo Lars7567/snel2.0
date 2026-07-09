@@ -113,11 +113,11 @@
 .ao-cta__inner { max-width: 600px; margin: 0 auto; }
 .ao-cta__titel {
     font-size: 32px; font-weight: 900;
-    color: var(--color-body-text, #1a1a1a); letter-spacing: -0.03em;
+    color: var(--color-muted, #1a1a1a); letter-spacing: -0.03em;
     margin: 0 0 14px;
 }
 .ao-cta__sub {
-    font-size: 15px; color: var(--color-muted, #9ca3af);
+    font-size: 15px; color: var(--color-body-text, #1a1a1a);
     line-height: 1.7; margin: 0 0 32px;
 }
 .ao-cta__btn {
