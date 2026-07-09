@@ -236,7 +236,7 @@
             gap: 10px;
         }
         .site-header__logout-btn {
-            background: linear-gradient(135deg, var(--color-accent, #6366f1), var(--color-primary, #4f46e5));
+            background: #111111;
             color: #fff;
             border: none;
             padding: 11px 26px;
@@ -247,15 +247,13 @@
             text-transform: uppercase;
             letter-spacing: 0.08em;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(99,102,241,0.35);
-            transition: transform 0.18s, box-shadow 0.18s;
+            transition: background 0.18s;
             white-space: nowrap;
         }
         .site-header__logout-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 28px rgba(99,102,241,0.5);
+            background: #333333;
         }
-        .site-header__logout-btn:active { transform: translateY(0); }
+        .site-header__logout-btn:active { background: #000000; }
 
         /* Dropdown */
         .site-header__dropdown { position: relative; }
