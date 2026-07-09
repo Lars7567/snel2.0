@@ -128,7 +128,7 @@
     letter-spacing: 0.03em;
     transition: background 0.18s, transform 0.18s;
 }
-.ao-cta__btn:hover { background: var(--color-primary-hover, #333); transform: translateY(-2px); }
+.ao-cta__btn:hover { background: var(--color-muted, #333); transform: translateY(-2px); }
 </style>
 
 {{-- Hero --}}
