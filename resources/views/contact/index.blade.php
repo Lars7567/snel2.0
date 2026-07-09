@@ -123,7 +123,7 @@
 
 .ct-form__btn {
     display: inline-flex; align-items: center; gap: 8px;
-    background: var(--color-primary, #1a1a1a); color: #fff; border: none; cursor: pointer;
+    background: var(--color-muted, #1a1a1a); color: #fff; border: none; cursor: pointer;
     font-size: 14px; font-weight: 700;
     font-family: 'Plus Jakarta Sans', sans-serif;
     padding: 14px 32px; border-radius: 50px; letter-spacing: 0.03em;
