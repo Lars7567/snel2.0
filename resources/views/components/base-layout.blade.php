@@ -205,7 +205,7 @@
             left: 16px;
             right: 16px;
             height: 2px;
-            background: var(--color-accent, #6366f1);
+            background: var(--color-header-hover, var(--color-accent, #6366f1));
             border-radius: 2px;
             transform: scaleX(0);
             transition: transform 0.22s cubic-bezier(.4,0,.2,1);
