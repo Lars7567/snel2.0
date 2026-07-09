@@ -5,14 +5,14 @@
 
 /* ── Hero ─────────────────────────────────────────── */
 .ao-hero {
-    background: #1a1a1a;
+    background: var(--color-hero-bg, #1a1a1a);
     padding: 48px 32px;
     text-align: center;
 }
 .ao-hero__label {
     display: inline-block;
     background: rgba(255,255,255,0.08);
-    color: #c8bfb0;
+    color: var(--color-hero-sub, #c8bfb0);
     font-size: 11px; font-weight: 800;
     letter-spacing: 0.16em; text-transform: uppercase;
     padding: 5px 16px; border-radius: 50px;
@@ -20,18 +20,18 @@
 }
 .ao-hero__titel {
     font-size: 52px; font-weight: 900;
-    color: #fff; letter-spacing: -0.04em;
+    color: var(--color-hero-text, #fff); letter-spacing: -0.04em;
     line-height: 1.1; margin: 0 0 20px;
 }
 .ao-hero__sub {
-    font-size: 17px; color: #9ca3af;
+    font-size: 17px; color: var(--color-hero-sub, #9ca3af);
     font-weight: 400; line-height: 1.7;
     max-width: 560px; margin: 0 auto;
 }
 
 /* ── 3 blokken ────────────────────────────────────── */
 .ao-blokken {
-    background: #fff;
+    background: var(--color-body-bg, #fff);
     padding: 80px 32px;
 }
 .ao-blokken__inner {
@@ -42,8 +42,8 @@
 @media (max-width: 800px) { .ao-blokken__inner { grid-template-columns: 1fr; } }
 
 .ao-blok {
-    background: #f9f7f3;
-    border: 1px solid #ece9e3;
+    background: var(--color-card-bg, #f9f7f3);
+    border: 1px solid var(--color-border, #ece9e3);
     border-radius: 20px;
     padding: 36px 32px;
 }
@@ -52,16 +52,16 @@
     background: var(--color-header-bg, #f5f0e8);
     border-radius: 14px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 20px; color: #8b7355;
+    font-size: 20px; color: var(--color-muted, #8b7355);
     margin-bottom: 24px;
 }
 .ao-blok__titel {
     font-size: 20px; font-weight: 800;
-    color: #1a1a1a; letter-spacing: -0.02em;
+    color: var(--color-body-text, #1a1a1a); letter-spacing: -0.02em;
     margin: 0 0 12px;
 }
 .ao-blok__tekst {
-    font-size: 14px; color: #6b7280;
+    font-size: 14px; color: var(--color-content-text, #6b7280);
     line-height: 1.75; margin: 0;
 }
 
@@ -80,15 +80,15 @@
 .ao-verhaal__img {
     border-radius: 20px; overflow: hidden;
     aspect-ratio: 4/3;
-    background: #ede8de;
+    background: var(--color-header-bg, #ede8de);
     display: flex; align-items: center; justify-content: center;
-    color: #c8bfb0; font-size: 64px;
+    color: var(--color-muted, #c8bfb0); font-size: 64px;
 }
 .ao-verhaal__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .ao-verhaal__label {
     display: inline-block;
-    background: #ede8de; color: #8b7355;
+    background: var(--color-header-bg, #ede8de); color: var(--color-muted, #8b7355);
     font-size: 11px; font-weight: 800;
     letter-spacing: 0.14em; text-transform: uppercase;
     padding: 5px 14px; border-radius: 50px;
@@ -96,39 +96,39 @@
 }
 .ao-verhaal__titel {
     font-size: 36px; font-weight: 900;
-    color: #1a1a1a; letter-spacing: -0.03em;
+    color: var(--color-body-text, #1a1a1a); letter-spacing: -0.03em;
     line-height: 1.15; margin: 0 0 20px;
 }
 .ao-verhaal__tekst {
-    font-size: 15px; color: #6b7280;
+    font-size: 15px; color: var(--color-content-text, #6b7280);
     line-height: 1.8; margin: 0 0 16px;
 }
 
 /* ── CTA ──────────────────────────────────────────── */
 .ao-cta {
-    background: #fff;
+    background: var(--color-body-bg, #fff);
     padding: 80px 32px;
     text-align: center;
 }
 .ao-cta__inner { max-width: 600px; margin: 0 auto; }
 .ao-cta__titel {
     font-size: 32px; font-weight: 900;
-    color: #1a1a1a; letter-spacing: -0.03em;
+    color: var(--color-body-text, #1a1a1a); letter-spacing: -0.03em;
     margin: 0 0 14px;
 }
 .ao-cta__sub {
-    font-size: 15px; color: #9ca3af;
+    font-size: 15px; color: var(--color-muted, #9ca3af);
     line-height: 1.7; margin: 0 0 32px;
 }
 .ao-cta__btn {
     display: inline-flex; align-items: center; gap: 8px;
-    background: #1a1a1a; color: #fff;
+    background: var(--color-primary, #1a1a1a); color: #fff;
     text-decoration: none; font-size: 14px; font-weight: 700;
     padding: 14px 32px; border-radius: 50px;
     letter-spacing: 0.03em;
     transition: background 0.18s, transform 0.18s;
 }
-.ao-cta__btn:hover { background: #333; transform: translateY(-2px); }
+.ao-cta__btn:hover { background: var(--color-primary-hover, #333); transform: translateY(-2px); }
 </style>
 
 {{-- Hero --}}
