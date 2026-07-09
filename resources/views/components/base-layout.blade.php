@@ -186,7 +186,7 @@
             transform: translateX(-50%);
         }
         .site-header__nav > a {
-            color: #1a1a1a;
+            color: var(--color-header-text, #1a1a1a);
             text-decoration: none;
             font-weight: 700;
             font-size: 13px;
@@ -215,7 +215,7 @@
 
         /* Admin nav links */
         .site-header__admin-link {
-            color: #1a1a1a;
+            color: var(--color-header-text, #1a1a1a);
             text-decoration: none;
             font-weight: 700;
             font-size: 12px;
