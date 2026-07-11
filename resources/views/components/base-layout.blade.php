@@ -151,7 +151,8 @@
         .topbar__sep {
             width: 1px;
             height: 12px;
-            background: #333;
+            background: var(--color-topbar-text, #fff);
+            opacity: 0.4;
             flex-shrink: 0;
         }
         @media (max-width: 640px) {
