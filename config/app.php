@@ -123,17 +123,4 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | First-run Setup Key
-    |--------------------------------------------------------------------------
-    |
-    | Required as a ?key= query parameter to access /setup, in addition to
-    | the "no users exist yet" check. Prevents anyone who reaches the site
-    | before you do from racing you to create the first admin account.
-    |
-    */
-
-    'setup_key' => env('SETUP_KEY'),
-
 ];
