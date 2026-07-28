@@ -83,32 +83,60 @@ class SettingsController extends Controller
             $settings['mail_password'] = $request->input('mail_password');
         }
 
-        // PDF verwijderen als aangevinkt
-        if ($request->boolean('av_pdf_delete')) {
-            $existing = $settings['av_pdf'] ?? '';
-            if ($existing && file_exists(public_path('files/' . $existing))) {
-                unlink(public_path('files/' . $existing));
-            }
-            $settings['av_pdf'] = '';
-        }
-
-        // Nieuw PDF uploaden
-        if ($request->hasFile('av_pdf')) {
-            $existing = $settings['av_pdf'] ?? '';
-            if ($existing && file_exists(public_path('files/' . $existing))) {
-                unlink(public_path('files/' . $existing));
-            }
-            $filename = 'av_' . time() . '.pdf';
-            $request->file('av_pdf')->move(public_path('files'), $filename);
-            $settings['av_pdf'] = $filename;
-        }
-
         file_put_contents($this->storagePath, json_encode($settings, JSON_PRETTY_PRINT));
 
         if ($request->ajax()) {
             return response()->json(['success' => true, 'message' => 'Instellingen opgeslagen!']);
         }
         return redirect()->route('admin.settings')->with('success', 'Instellingen opgeslagen!');
+    }
+
+    // Losstaande, directe upload van de algemene-voorwaarden PDF (geen page reload nodig)
+    public function uploadAvPdf(Request $request)
+    {
+        $request->validate([
+            'av_pdf' => ['required', 'file', 'mimes:pdf', 'max:10240'],
+        ], [
+            'av_pdf.required' => 'Kies eerst een PDF-bestand.',
+            'av_pdf.file'     => 'Ongeldig bestand.',
+            'av_pdf.mimes'    => 'Alleen PDF-bestanden zijn toegestaan.',
+            'av_pdf.max'      => 'Het bestand mag maximaal 10 MB zijn.',
+        ]);
+
+        $settings = $this->loadSettings();
+
+        $existing = $settings['av_pdf'] ?? '';
+        if ($existing && file_exists(public_path('files/' . $existing))) {
+            unlink(public_path('files/' . $existing));
+        }
+
+        $filename = 'av_' . time() . '.pdf';
+        $request->file('av_pdf')->move(public_path('files'), $filename);
+        $settings['av_pdf'] = $filename;
+
+        file_put_contents($this->storagePath, json_encode($settings, JSON_PRETTY_PRINT));
+
+        return response()->json([
+            'success'  => true,
+            'message'  => 'PDF geüpload!',
+            'url'      => route('av.download') . '?v=' . time(),
+        ]);
+    }
+
+    // Losstaande, directe verwijdering van de algemene-voorwaarden PDF
+    public function deleteAvPdf(Request $request)
+    {
+        $settings = $this->loadSettings();
+
+        $existing = $settings['av_pdf'] ?? '';
+        if ($existing && file_exists(public_path('files/' . $existing))) {
+            unlink(public_path('files/' . $existing));
+        }
+        $settings['av_pdf'] = '';
+
+        file_put_contents($this->storagePath, json_encode($settings, JSON_PRETTY_PRINT));
+
+        return response()->json(['success' => true, 'message' => 'PDF verwijderd!']);
     }
 
     public function testMail(Request $request)

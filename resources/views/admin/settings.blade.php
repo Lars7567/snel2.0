@@ -155,31 +155,45 @@
         </div>
 
         <div class="db-section">
-            <h2 class="db-section-title">Algemene voorwaarden</h2>
+            <h2 class="db-section-title">Algemene voorwaarden — tekst</h2>
             <p class="db-hint" style="margin-bottom:18px;">
-                Zichtbaar op <a href="{{ route('av.download') }}" target="_blank" style="color:#111;text-decoration:underline;">/algemene-voorwaarden</a>.
-                Een geüploade PDF heeft voorrang.
+                Wordt getoond op <a href="{{ route('av.download') }}" target="_blank" style="color:#111;text-decoration:underline;">/algemene-voorwaarden</a>
+                als er geen PDF is geüpload (zie hieronder).
             </p>
-            @php $avPdf = $settings['av_pdf'] ?? ''; @endphp
-            @if($avPdf && file_exists(public_path('files/' . $avPdf)))
-                <div class="db-pdf-bar">
-                    <i class="fa-solid fa-file-pdf" style="color:#dc2626;"></i>
-                    <a href="{{ route('av.download') }}" target="_blank">Huidig PDF bekijken</a>
-                    <label style="margin-left:auto;display:flex;align-items:center;gap:6px;color:#dc2626;font-weight:600;font-size:.85rem;cursor:pointer;">
-                        <input type="checkbox" name="av_pdf_delete" value="1"> Verwijder PDF
-                    </label>
-                </div>
-            @endif
-            <div class="db-field">
-                <label class="db-label">PDF uploaden <span class="db-hint">(max 10 MB)</span></label>
-                <input type="file" name="av_pdf" class="db-input" accept=".pdf">
-            </div>
-            <div class="db-field">
-                <label class="db-label">Of: tekst (HTML) als fallback</label>
+            <div class="db-field" style="margin-bottom:0;">
                 <textarea name="av_content" class="db-input db-textarea" rows="10">{{ $settings['av_content'] ?? '' }}</textarea>
             </div>
         </div>
     </form>
+
+    {{-- Algemene voorwaarden PDF: los blok, werkt direct (geen page reload / geen "Opslaan" nodig) --}}
+    <div class="db-section">
+        <h2 class="db-section-title">Algemene voorwaarden — PDF</h2>
+        <p class="db-hint" style="margin-bottom:18px;">
+            Zichtbaar op <a href="{{ route('av.download') }}" target="_blank" style="color:#111;text-decoration:underline;">/algemene-voorwaarden</a>.
+            Een geüploade PDF heeft voorrang op de tekst hierboven. Uploaden en verwijderen werken direct.
+        </p>
+
+        @php $avPdf = $settings['av_pdf'] ?? ''; @endphp
+        <div class="db-pdf-bar" id="av-pdf-bar" style="{{ ($avPdf && file_exists(public_path('files/' . $avPdf))) ? '' : 'display:none;' }}">
+            <i class="fa-solid fa-file-pdf" style="color:#dc2626;"></i>
+            <a href="{{ route('av.download') }}" target="_blank" id="av-pdf-link">Huidig PDF bekijken</a>
+            <button type="button" class="db-btn-outline" id="av-pdf-delete-btn" style="margin-left:auto;padding:5px 14px;font-size:.82rem;color:#dc2626;border-color:#fca5a5;" onclick="deleteAvPdf()">
+                <i class="fa-solid fa-trash"></i> Verwijderen
+            </button>
+        </div>
+
+        <div class="db-field" style="margin-bottom:0;">
+            <label class="db-label">PDF uploaden <span class="db-hint">(max 10 MB)</span></label>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+                <input type="file" id="av-pdf-input" class="db-input" style="flex:1;min-width:220px;" accept=".pdf">
+                <button type="button" class="db-btn-primary" id="av-pdf-upload-btn" onclick="uploadAvPdf()">
+                    <i class="fa-solid fa-upload"></i> Uploaden
+                </button>
+            </div>
+            <p class="db-hint" id="av-pdf-status" style="margin-top:8px;"></p>
+        </div>
+    </div>
     </div>
 
     {{-- ═══════════════════════════════════════
@@ -238,9 +252,7 @@
             <div class="db-field">
                 <label class="db-label">Favicon <span class="db-hint">(png/ico, 32×32px)</span></label>
                 @php $fav = $settings['favicon'] ?? ''; @endphp
-                @if($fav && file_exists(public_path(ltrim($fav,'/'))))
-                    <img src="{{ $fav }}" style="width:32px;height:32px;margin-bottom:8px;border:1px solid #e5e7eb;border-radius:4px;padding:2px;display:block;">
-                @endif
+                <img id="preview-favicon" src="{{ $fav }}" style="width:32px;height:32px;margin-bottom:8px;border:1px solid #e5e7eb;border-radius:4px;padding:2px;display:{{ ($fav && file_exists(public_path(ltrim($fav,'/')))) ? 'block' : 'none' }};">
                 <input type="file" name="favicon" class="db-input" accept="image/png,image/x-icon,image/svg+xml">
             </div>
         </div>
@@ -256,9 +268,7 @@
             ] as [$field, $fieldLabel, $current, $hiddenName])
             <div class="db-field" style="{{ !$loop->first ? 'padding-top:24px;border-top:1px solid #e5e7eb;margin-top:24px;' : '' }}">
                 <label class="db-label">{{ $fieldLabel }}</label>
-                @if($current && file_exists(public_path(ltrim($current,'/'))))
-                    <img src="{{ $current }}" style="max-width:200px;max-height:60px;display:block;margin-bottom:10px;border:1px solid #e5e7eb;border-radius:4px;padding:6px;background:#f9fafb;">
-                @endif
+                <img id="preview-{{ $field }}" src="{{ $current }}" style="max-width:200px;max-height:60px;display:{{ ($current && file_exists(public_path(ltrim($current,'/')))) ? 'block' : 'none' }};margin-bottom:10px;border:1px solid #e5e7eb;border-radius:4px;padding:6px;background:#f9fafb;">
                 <p class="db-hint" style="margin-bottom:8px;">Kies uit bibliotheek:</p>
                 <div class="img-lib" id="picker-{{ $field }}">
                     @foreach($images as $img)
@@ -704,6 +714,19 @@ function pickImg(field, path, el) {
     document.querySelectorAll('#picker-' + field + ' .img-lib__item').forEach(i => i.classList.remove('img-lib__item--active'));
     el.classList.add('img-lib__item--active');
     document.getElementById(field + '_existing').value = path;
+    setImagePreview(field, path);
+}
+
+function setImagePreview(field, url) {
+    const img = document.getElementById('preview-' + field);
+    if (!img) return;
+    if (url) {
+        img.src = url;
+        img.style.display = 'block';
+    } else {
+        img.removeAttribute('src');
+        img.style.display = 'none';
+    }
 }
 
 // ── Font preview ──────────────────────────────────────────
@@ -797,6 +820,16 @@ async function saveAll() {
         const r2 = await fetchWithTimeout('{{ route("admin.branding.update") }}', { method:'POST', body: new FormData(document.getElementById('branding-form')), headers });
         const j2 = await r2.json().catch(() => ({ success: false, message: 'Ongeldige respons (stijl)' }));
 
+        if (j2.success && j2.data) {
+            setImagePreview('logo', j2.data.logo);
+            setImagePreview('footer_logo', j2.data.footer_logo);
+            setImagePreview('header_image', j2.data.header_image);
+            setImagePreview('favicon', j2.data.favicon);
+            // Geüploade bestanden zijn verwerkt — leeg de file-inputs zodat ze niet
+            // nogmaals worden meegestuurd bij de volgende keer opslaan.
+            document.querySelectorAll('#branding-form input[type=file]').forEach(i => i.value = '');
+        }
+
         const r3 = await fetchWithTimeout('{{ route("admin.content.update") }}', { method:'POST', body: new FormData(document.getElementById('content-form')), headers });
         const j3 = await r3.json().catch(() => ({ success: false, message: 'Ongeldige respons (teksten)' }));
 
@@ -812,6 +845,81 @@ async function saveAll() {
         btn.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Opslaan';
     }
+}
+
+// ── Algemene voorwaarden PDF: direct uploaden/verwijderen ──
+async function uploadAvPdf() {
+    const input  = document.getElementById('av-pdf-input');
+    const status = document.getElementById('av-pdf-status');
+    const btn    = document.getElementById('av-pdf-upload-btn');
+
+    if (!input.files.length) {
+        status.textContent = 'Kies eerst een PDF-bestand.';
+        status.style.color = '#dc2626';
+        return;
+    }
+
+    const fd = new FormData();
+    fd.append('av_pdf', input.files[0]);
+    fd.append('_token', document.querySelector('#settings-form [name=_token]').value);
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploaden...';
+    status.textContent = '';
+
+    try {
+        const r = await fetchWithTimeout('{{ route("admin.settings.av_pdf.upload") }}', {
+            method: 'POST', body: fd, headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        });
+        const j = await r.json().catch(() => ({ success: false, message: 'Ongeldige respons.' }));
+
+        if (j.success) {
+            document.getElementById('av-pdf-link').href = j.url;
+            document.getElementById('av-pdf-bar').style.display = '';
+            input.value = '';
+            status.textContent = 'PDF geüpload.';
+            status.style.color = '#059669';
+        } else {
+            status.textContent = (j.errors && j.errors.av_pdf && j.errors.av_pdf[0]) || j.message || 'Uploaden mislukt.';
+            status.style.color = '#dc2626';
+        }
+    } catch (e) {
+        status.textContent = 'Verbindingsfout bij uploaden.';
+        status.style.color = '#dc2626';
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-upload"></i> Uploaden';
+    }
+}
+
+async function deleteAvPdf() {
+    adminConfirm('Weet je zeker dat je de PDF wilt verwijderen?', async function () {
+        const btn = document.getElementById('av-pdf-delete-btn');
+        btn.disabled = true;
+
+        try {
+            const r = await fetchWithTimeout('{{ route("admin.settings.av_pdf.delete") }}', {
+                method: 'DELETE',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('#settings-form [name=_token]').value,
+                },
+            });
+            const j = await r.json().catch(() => ({ success: false, message: 'Ongeldige respons.' }));
+
+            if (j.success) {
+                document.getElementById('av-pdf-bar').style.display = 'none';
+            } else {
+                document.getElementById('av-pdf-status').textContent = j.message || 'Verwijderen mislukt.';
+                document.getElementById('av-pdf-status').style.color = '#dc2626';
+            }
+        } catch (e) {
+            document.getElementById('av-pdf-status').textContent = 'Verbindingsfout bij verwijderen.';
+            document.getElementById('av-pdf-status').style.color = '#dc2626';
+        } finally {
+            btn.disabled = false;
+        }
+    });
 }
 
 function showAlert(msg, type) {

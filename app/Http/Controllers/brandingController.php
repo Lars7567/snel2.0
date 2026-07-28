@@ -43,8 +43,9 @@ class brandingController extends Controller
 
         // Favicon uploaden
         if ($request->hasFile('favicon')) {
+            $this->deleteUploadedImage($settings['favicon'] ?? '', 'favicon_');
             $file     = $request->file('favicon');
-            $filename = 'favicon.' . $file->getClientOriginalExtension();
+            $filename = 'favicon_' . time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('images'), $filename);
             $settings['favicon'] = '/images/' . $filename;
 
@@ -93,8 +94,9 @@ class brandingController extends Controller
             $settings['logo'] = $request->input('logo_existing');
         }
         if ($request->hasFile('logo')) {
+            $this->deleteUploadedImage($settings['logo'] ?? '', 'logo_');
             $file     = $request->file('logo');
-            $filename = 'logo.' . $file->getClientOriginalExtension();
+            $filename = 'logo_' . time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('images'), $filename);
             $settings['logo'] = '/images/' . $filename;
         }
@@ -104,8 +106,9 @@ class brandingController extends Controller
             $settings['footer_logo'] = $request->input('footer_logo_existing');
         }
         if ($request->hasFile('footer_logo')) {
+            $this->deleteUploadedImage($settings['footer_logo'] ?? '', 'footer_logo_');
             $file     = $request->file('footer_logo');
-            $filename = 'footer_logo.' . $file->getClientOriginalExtension();
+            $filename = 'footer_logo_' . time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('images'), $filename);
             $settings['footer_logo'] = '/images/' . $filename;
         }
@@ -115,8 +118,9 @@ class brandingController extends Controller
             $settings['header_image'] = $request->input('header_image_existing');
         }
         if ($request->hasFile('header_image')) {
+            $this->deleteUploadedImage($settings['header_image'] ?? '', 'header_image_');
             $file     = $request->file('header_image');
-            $filename = 'header_image.' . $file->getClientOriginalExtension();
+            $filename = 'header_image_' . time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('images'), $filename);
             $settings['header_image'] = '/images/' . $filename;
         }
@@ -131,9 +135,31 @@ class brandingController extends Controller
         file_put_contents($this->storagePath, json_encode($settings, JSON_PRETTY_PRINT));
 
         if ($request->ajax()) {
-            return response()->json(['success' => true, 'message' => 'Stijl opgeslagen!']);
+            return response()->json([
+                'success' => true,
+                'message' => 'Stijl opgeslagen!',
+                'data'    => [
+                    'logo'         => $settings['logo']         ?? '',
+                    'footer_logo'  => $settings['footer_logo']  ?? '',
+                    'header_image' => $settings['header_image'] ?? '',
+                    'favicon'      => $settings['favicon']      ?? '',
+                ],
+            ]);
         }
         return redirect()->route('admin.branding')->with('success', 'Huisstijl opgeslagen!');
+    }
+
+    // Verwijdert een eerder geüpload bestand voor dit veld (nooit een handmatig
+    // in de bibliotheek geplaatste afbeelding, die kan elders nog in gebruik zijn)
+    private function deleteUploadedImage(string $path, string $prefix): void
+    {
+        if (! $path || ! str_starts_with(basename($path), $prefix)) {
+            return;
+        }
+        $full = public_path(ltrim($path, '/'));
+        if (file_exists($full)) {
+            unlink($full);
+        }
     }
 
     // Laad instellingen uit JSON, met fallback naar config/branding.php

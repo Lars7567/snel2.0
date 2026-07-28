@@ -94,6 +94,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
     Route::post('/settings', [SettingsController::class, 'update'])->name('settings.update');
     Route::post('/settings/test-mail', [SettingsController::class, 'testMail'])->name('settings.test_mail');
+    Route::post('/settings/av-pdf', [SettingsController::class, 'uploadAvPdf'])->name('settings.av_pdf.upload');
+    Route::delete('/settings/av-pdf', [SettingsController::class, 'deleteAvPdf'])->name('settings.av_pdf.delete');
     Route::get('/offerte-tool', function () {
         return view('admin.offerte-tool');
     })->name('offerte_tool');
