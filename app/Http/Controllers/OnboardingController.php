@@ -52,11 +52,13 @@ class OnboardingController extends Controller
             }
         }
 
+        // Bewust leeg: bij de allereerste keer inloggen mag de wizard geen
+        // voorbeeld-merkgegevens tonen — de klant vult alles zelf in.
         return [
-            'site_name' => config('branding.site_name'),
-            'colors'    => config('branding.colors'),
-            'logo'      => config('branding.logo'),
-            'favicon'   => config('branding.favicon'),
+            'site_name' => '',
+            'colors'    => [],
+            'logo'      => '',
+            'favicon'   => '',
         ];
     }
 }

@@ -108,19 +108,19 @@
                 <p class="hint">De hoofdkleuren van je website. De rest kun je later verfijnen bij Instellingen &rarr; Stijl.</p>
                 <div class="colors-grid">
                     @foreach([
-                        ['primary_color', 'Hoofdkleur',         $settings['colors']['primary']    ?? '#b8930a'],
-                        ['accent_color',  'Accentkleur',        $settings['colors']['accent']     ?? '#b8930a'],
-                        ['header_bg',     'Header achtergrond', $settings['colors']['header_bg']  ?? '#f5f0e8'],
-                        ['footer_bg',     'Footer achtergrond', $settings['colors']['footer_bg']  ?? '#f5f0e8'],
-                        ['body_bg',       'Pagina achtergrond', $settings['colors']['body_bg']    ?? '#ffffff'],
-                        ['body_text',     'Pagina tekst',       $settings['colors']['body_text']  ?? '#1a1a1a'],
+                        ['primary_color', 'Hoofdkleur',         $settings['colors']['primary']    ?? ''],
+                        ['accent_color',  'Accentkleur',        $settings['colors']['accent']     ?? ''],
+                        ['header_bg',     'Header achtergrond', $settings['colors']['header_bg']  ?? ''],
+                        ['footer_bg',     'Footer achtergrond', $settings['colors']['footer_bg']  ?? ''],
+                        ['body_bg',       'Pagina achtergrond', $settings['colors']['body_bg']    ?? ''],
+                        ['body_text',     'Pagina tekst',       $settings['colors']['body_text']  ?? ''],
                     ] as [$name, $label, $val])
                     <div class="color-item">
                         <span>{{ $label }}</span>
                         <div class="row">
-                            <input type="color" name="{{ $name }}" value="{{ $val }}" class="color-input"
+                            <input type="color" name="{{ $name }}" value="{{ $val ?: '#000000' }}" class="color-input"
                                    oninput="this.nextElementSibling.textContent=this.value">
-                            <span class="color-hex">{{ $val }}</span>
+                            <span class="color-hex">{{ $val ?: 'nog niet gekozen' }}</span>
                         </div>
                     </div>
                     @endforeach
