@@ -81,6 +81,7 @@
 
         <form method="POST" action="/setup">
             @csrf
+            <input type="hidden" name="key" value="{{ $key }}">
 
             <label for="name">Naam</label>
             <input type="text" id="name" name="name" value="{{ old('name') }}" required autofocus>

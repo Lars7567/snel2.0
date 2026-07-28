@@ -37,9 +37,11 @@ Route::name('bedrijven.')->group(function () {
     Route::get('/bedrijven-laden', [bedrijvenController::class, 'meer'])->name('meer');
 });
 
-// Eerste keer setup — alleen toegankelijk als er nog geen gebruikers zijn
-Route::get('/setup',  [SetupController::class, 'index'])->name('setup');
-Route::post('/setup', [SetupController::class, 'store']);
+// Eerste keer setup — alleen toegankelijk met de juiste ?key= en als er nog geen gebruikers zijn
+Route::middleware('throttle:10,1')->group(function () {
+    Route::get('/setup',  [SetupController::class, 'index'])->name('setup');
+    Route::post('/setup', [SetupController::class, 'store']);
+});
 
 // Frontend theme cookie (bezoekers kunnen zelf van template wisselen)
 Route::post('/set-template', function (Request $request) {
