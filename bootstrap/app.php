@@ -12,6 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->redirectUsersTo(fn () => route('admin.index'));
+        $middleware->alias([
+            'onboarded' => \App\Http\Middleware\EnsureOnboarded::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

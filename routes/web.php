@@ -13,6 +13,7 @@ use App\Http\Controllers\SetupController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ExportImportController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\OnboardingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -65,9 +66,15 @@ Route::get('/algemene-voorwaarden', function () {
 
 Route::get('dashboard', function () {
     return view('/dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'onboarded'])->name('dashboard');
 
-Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+// Eenmalige inrichtingswizard: staat buiten de 'onboarded'-gate (anders loop je vast)
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/onboarding', [OnboardingController::class, 'index'])->name('onboarding.index');
+    Route::post('/onboarding/complete', [OnboardingController::class, 'complete'])->name('onboarding.complete');
+});
+
+Route::middleware(['auth', 'verified', 'onboarded'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [adminController::class, 'index'])->name('index');
     Route::get('/create', [adminController::class, 'create'])->name('create');
     // dedicated form for adding a new category

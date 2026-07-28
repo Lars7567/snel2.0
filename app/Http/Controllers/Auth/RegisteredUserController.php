@@ -14,20 +14,17 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
+    // Uitgeschakeld: het eerste (en enige) account wordt aangemaakt via de
+    // beveiligde /setup-route (?key=...), niet via Laravel's standaard
+    // /register die geen SETUP_KEY-check had.
     public function create(): View
     {
-        if (User::exists()) {
-            abort(404);
-        }
-
-        return view('auth.register');
+        abort(404);
     }
 
     public function store(Request $request): RedirectResponse
     {
-        if (User::exists()) {
-            abort(404);
-        }
+        abort(404);
 
         $request->validate([
             'name'     => ['required', 'string', 'max:255'],

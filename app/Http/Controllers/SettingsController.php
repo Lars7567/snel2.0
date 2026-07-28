@@ -58,7 +58,6 @@ class SettingsController extends Controller
             'footer_linkedin'  => ['nullable', 'url', 'max:255'],
             'footer_twitter'   => ['nullable', 'url', 'max:255'],
             'av_content'       => ['nullable', 'string'],
-            'av_pdf'           => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
         ]);
 
         $settings = $this->loadSettings();
