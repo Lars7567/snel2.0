@@ -25,6 +25,9 @@
 !/public/images/.gitkeep
 !/public/images/placeholder.svg
 !/public/images/offerte-logos/
+/public/favicon.ico
+/public/files/*
+!/public/files/.gitkeep
 Homestead.json
 Homestead.yaml
 Thumbs.db
