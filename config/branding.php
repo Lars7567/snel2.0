@@ -11,10 +11,12 @@ return [
     'site_name'         => 'Snel Op Zoek',
     'site_desc'         => 'Vind snel het juiste bedrijf bij u in de buurt.',
     'footer_bottom_text' => '',
-    'favicon'      => '/images/favicon.png',
-    'logo'         => '/images/placeholder-logo.svg',
-    'footer_logo'  => '/images/placeholder-logo.svg',
-    'header_image' => '/images/bedrijfzoeken.png',
+    // Bewust leeg: geen van deze bestanden komt standaard mee in de repo.
+    // Zolang er niets is geüpload, laat de layout deze gewoon weg.
+    'favicon'      => null,
+    'logo'         => null,
+    'footer_logo'  => null,
+    'header_image' => null,
 
     /*
     |--------------------------------------------------------------------------

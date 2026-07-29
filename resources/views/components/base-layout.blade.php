@@ -10,9 +10,13 @@
         $bFooterBottomText  = $bs['footer_bottom_text']   ?? config('branding.footer_bottom_text');
         $bSiteDesc     = $bs['site_desc']                 ?? config('branding.site_desc');
         $bFavicon      = $bs['favicon']                   ?? config('branding.favicon');
+        $bFaviconExists = $bFavicon && file_exists(public_path(ltrim($bFavicon, '/')));
         $bLogo         = $bs['logo']                      ?? config('branding.logo');
+        $bLogoExists   = $bLogo && file_exists(public_path(ltrim($bLogo, '/')));
         $bFooterLogo   = ($bs['footer_logo'] ?? null) ?: $bLogo;
+        $bFooterLogoExists = $bFooterLogo && file_exists(public_path(ltrim($bFooterLogo, '/')));
         $bHeaderImage  = $bs['header_image']              ?? config('branding.header_image');
+        $bHeaderImageExists = $bHeaderImage && file_exists(public_path(ltrim($bHeaderImage, '/')));
         $bPrimary      = $bs['colors']['primary']         ?? config('branding.colors.primary');
         $bPrimaryHover = $bs['colors']['primary_hover']   ?? config('branding.colors.primary_hover');
         $bAccent       = $bs['colors']['accent']          ?? config('branding.colors.accent');
@@ -106,7 +110,7 @@
             --color-border:        {{ $bBorder }};
             --color-content-text:  {{ $bContentText }};
             --font-family:         {{ $bFontFamily }};
-            --header-image:        url('{{ $bHeaderImage }}');
+            --header-image:        {{ $bHeaderImageExists ? "url('{$bHeaderImage}')" : 'none' }};
         }
 
         /* ── Plus Jakarta Sans als header font ──────────── */
@@ -182,6 +186,12 @@
             height: 64px;
             width: auto;
             display: block;
+        }
+        .site-header__logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--color-header-text, #1a1a1a);
+            white-space: nowrap;
         }
 
         /* Nav gecentreerd */
@@ -479,7 +489,9 @@
 
     <title>{{ $bSiteName }}</title>
     <meta name="description" content="{{ $bSiteDesc }}">
-    <link rel="icon" type="image/png" href="{{ $bFavicon }}">
+    @if($bFaviconExists)
+        <link rel="icon" type="image/png" href="{{ $bFavicon }}">
+    @endif
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -542,7 +554,13 @@
     <div class="site-header__inner">
 
         <div class="site-header__logo">
-            <a href="{{ route('home.index') }}"><img src="{{ $bLogo }}" alt="{{ $bSiteName }}"></a>
+            <a href="{{ route('home.index') }}">
+                @if($bLogoExists)
+                    <img src="{{ $bLogo }}" alt="{{ $bSiteName }}">
+                @else
+                    <span class="site-header__logo-text">{{ $bSiteName }}</span>
+                @endif
+            </a>
         </div>
 
         @if(auth()->check())
@@ -606,7 +624,11 @@
     <div class="footer-inner">
         <div class="footer-top">
             <div class="footer-col footer-col--logo">
-                <img src="{{ $bFooterLogo }}" alt="Logo">
+                @if($bFooterLogoExists)
+                    <img src="{{ $bFooterLogo }}" alt="Logo">
+                @else
+                    <span class="site-header__logo-text">{{ $bSiteName }}</span>
+                @endif
                 <p>{{ $bSiteDesc }}</p>
                 <div class="footer-socials">
                     @if($bFooterInstagram)

@@ -117,9 +117,9 @@ class ExportImportController extends Controller
             $brandingFile    = storage_path('app/branding.json');
             $branding        = file_exists($brandingFile) ? (json_decode(file_get_contents($brandingFile), true) ?? []) : [];
             $protectedImages = array_filter([
-                basename($branding['logo']         ?? config('branding.logo')),
-                basename($branding['favicon']      ?? config('branding.favicon')),
-                basename($branding['header_image'] ?? config('branding.header_image')),
+                basename($branding['logo']         ?? config('branding.logo') ?? ''),
+                basename($branding['favicon']      ?? config('branding.favicon') ?? ''),
+                basename($branding['header_image'] ?? config('branding.header_image') ?? ''),
             ]);
 
             // Kopieer afbeeldingen, sla branding bestanden over
