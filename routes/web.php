@@ -15,6 +15,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\OnboardingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 Route::name('home.')->group(function () {
     Route::get('/', [homeController::class, 'index'])->name('index');
@@ -51,7 +52,8 @@ Route::get('/algemene-voorwaarden', function () {
     $bs = file_exists($brandingFile) ? (json_decode(file_get_contents($brandingFile), true) ?? []) : [];
     $avPdf = $bs['av_pdf'] ?? '';
     if ($avPdf && file_exists(public_path('files/' . $avPdf))) {
-        return response()->file(public_path('files/' . $avPdf));
+        return response()->file(public_path('files/' . $avPdf))
+            ->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, 'algemene-voorwaarden.pdf');
     }
     $avContent = $bs['av_content'] ?? '';
     return view('av', compact('avContent'));
